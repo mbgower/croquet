@@ -1,6 +1,24 @@
 <html>
-<body>
+<head>
+<script type="text/javascript">
+  function changeStatus() {
+ // document.getElementbyID("blackball").fill="black";
+  // document.getElementbyID("blackball").stroke = "white";
+      var circle1 = document.getElementById("circle1"); 
+      circle1.style.fill="black";
 
+ // document.getElementById("blackball").setAttribute("r", 30);
+  // document.getElementById("blackball").setAttribute("fill", )
+ document.getElementById("fiddle").innerHTML = ""
+  // document.getElementbyID("blackball").style.display="none";
+ 
+
+ // window.alert("You probably want at least a couple of players. Please add some names.");
+}
+</script>
+</head>
+<body>
+<p id="fiddle">test</p>
 <style>
   circle.circle1 {
      stroke-width: 8;
@@ -40,29 +58,29 @@
 </style>
 
 <svg>
-  <circle class="circle1" cx="40" cy="40" r="24" stroke="blue" fill="blue"/>
+  <circle class="circle1" id="circle1" cx="40" cy="40" r="24" stroke="blue" fill="blue"/>
   <text x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="blue">Jonathan</text>
  </svg>
 
 
 <svg>
-  <circle class="circle2" cx="40" cy="40" r="24" />
+  <circle id="circle2" class="circle2" cx="40" cy="40" r="24" onclick="changeStatus()" />
     <text x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="black">Hermione</text>
 </svg>
 <svg>
-  <circle class="circle3" cx="40" cy="40" r="24" />
+  <circle id="circle3" class="circle3" cx="40" cy="40" r="24" />
     <text x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="red">Jack</text>
     </svg>
 <svg>
-  <circle class="circle4" cx="40" cy="40" r="24" />
+  <circle id="circle4" class="circle4" cx="40" cy="40" r="24" />
     <text x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" text-stroke="black" fill="yellow">Julie</text>
     </svg>
 <svg>
-  <circle class="circle5" cx="40" cy="40" r="24" />
+  <circle id="circle5" class="circle5" cx="40" cy="40" r="24" />
     <text x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="orange">Lucy</text>
     </svg>
 <svg>
-  <circle class="circle6" cx="40" cy="40" r="24" />
+  <circle id="circle6" class="circle6" cx="40" cy="40" r="24" />
     <text x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" text-stroke="black" fill="green">Harry Potter</text>
     </svg>
 
