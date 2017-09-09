@@ -71,34 +71,66 @@
   stroke-width:.2px;
   stroke-linejoin: round;
       }
-</style>
 
+.flex-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  
+  -webkit-flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.flex-item {
+  background: tomato;
+  padding: 5px;
+  width: 5px;
+  height: 5px;
+  margin-top: 10px;
+  
+  line-height: 50px;
+  color: white;
+  font-weight: bold;
+  font-size: 3em;
+  text-align: center;
+}
+
+</style>
+<ul class="flex-container">
+<li class="flex-item">
 <svg>
-  <circle class="circle1" id="circle1" cx="40" cy="40" r="24" onclick="changeStatus(1)" />
+  <circle circle1" id="circle1" cx="40" cy="40" r="24" onclick="changeStatus(1)" />
   <text class="text1" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="blue">Jonathan</text>
  </svg>
-
-
+ </li>
+<li class="flex-item">
 <svg>
-  <circle id="circle2" class="circle2" cx="40" cy="40" r="24" onclick="changeStatus(2)" />
+  <circle id="circle2" class="flex-item circle2" cx="40" cy="40" r="24" onclick="changeStatus(2)" />
     <text class="text2" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="black">Hermione</text>
 </svg>
+</li>
 <svg>
-  <circle id="circle3" class="circle3" cx="40" cy="40" r="24" onclick="changeStatus(3)" />
+  <circle id="circle3" class="flex-item circle3" cx="40" cy="40" r="24" onclick="changeStatus(3)" />
     <text class="text3" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="red">Jack</text>
     </svg>
 <svg>
-  <circle id="circle4" class="circle4" cx="40" cy="40" r="24" onclick="changeStatus(4)" />
+  <circle id="circle4" class="flex-item circle4" cx="40" cy="40" r="24" onclick="changeStatus(4)" />
     <text class="text4" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="yellow">Julie</text>
     </svg>
 <svg>
-  <circle id="circle5" class="circle5" cx="40" cy="40" r="24" onclick="changeStatus(5)" />
+  <circle id="circle5" class="flex-item circle5" cx="40" cy="40" r="24" onclick="changeStatus(5)" />
     <text class="text5" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="orange">Lucy</text>
     </svg>
 <svg>
-  <circle id="circle6" class="circle6" cx="40" cy="40" r="24" onclick="changeStatus(6)" />
+  <circle id="circle6" class="flex-item circle6" cx="40" cy="40" r="24" onclick="changeStatus(6)" />
     <text class="text6" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="green">Harry Potter</text>
     </svg>
-
+</ul>
 </body>
 </html>
