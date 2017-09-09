@@ -1,9 +1,11 @@
 <html>
 <head>
 <script type="text/javascript">
-  function changeStatus() {
-      var circle1 = document.getElementById("circle1"); 
-      circle1.style.fill="black";
+  function changeStatus(clr) {
+      // var circle1 = document.getElementById("circle1"); 
+      // window.alert("Value of clr is circle" + [clr]);
+      var circlex = document.getElementById("circle" + [clr] );
+      circlex.style.fill="white";
 
  // document.getElementById("blackball").setAttribute("r", 30);
  // document.getElementById("fiddle").innerHTML = ""
@@ -14,36 +16,54 @@
 </script>
 </head>
 <body>
+
 <!-- <p id="fiddle">test</p> -->
+<select>
+  <option value="blue">blue</option>
+  <option value="red">red</option>
+  <option value="black">black</option>
+  <option value="yellow">yellow</option>
+  <option value="orange">orange</option>
+  <option value="green">green</option>
+  <option value="brown">brown</option>
+  <option value="pink">pink</option>
+  <option value="purple">purple</option>
+  <option value="grey">grey</option>
+
+</select>
 <style>
-  circle.circle1 {
+  circle {
      stroke-width: 8;
+  }
+  circle.circle1 {
+      stroke: blue;
+      fill: blue;
   }
 
   circle.circle2 {
       stroke: black;
-      fill: white;
-      stroke-width: 8;
+      fill: black;
+ 
   }
     circle.circle3 {
       stroke: red;
       fill: red;
-      stroke-width: 8;
+ 
   }
     circle.circle4 {
       stroke: yellow;
-      fill: white;
-      stroke-width: 8;
+      fill: yellow;
+ 
   }
     circle.circle5 {
       stroke: orange;
-      fill: white;
-      stroke-width: 8;
+      fill: orange;
+ 
   }
     circle.circle6 {
       stroke: green;
-      fill: white;
-      stroke-width: 8;
+      fill: green;
+ 
   }
       text {
 /*  fill: none;*/
@@ -54,30 +74,30 @@
 </style>
 
 <svg>
-  <circle class="circle1" id="circle1" cx="40" cy="40" r="24" stroke="blue" fill="blue"/>
-  <text x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="blue">Jonathan</text>
+  <circle class="circle1" id="circle1" cx="40" cy="40" r="24" onclick="changeStatus(1)" />
+  <text class="text1" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="blue">Jonathan</text>
  </svg>
 
 
 <svg>
-  <circle id="circle2" class="circle2" cx="40" cy="40" r="24" onclick="changeStatus()" />
-    <text x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="black">Hermione</text>
+  <circle id="circle2" class="circle2" cx="40" cy="40" r="24" onclick="changeStatus(2)" />
+    <text class="text2" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="black">Hermione</text>
 </svg>
 <svg>
-  <circle id="circle3" class="circle3" cx="40" cy="40" r="24" />
-    <text x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="red">Jack</text>
+  <circle id="circle3" class="circle3" cx="40" cy="40" r="24" onclick="changeStatus(3)" />
+    <text class="text3" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="red">Jack</text>
     </svg>
 <svg>
-  <circle id="circle4" class="circle4" cx="40" cy="40" r="24" />
-    <text x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" text-stroke="black" fill="yellow">Julie</text>
+  <circle id="circle4" class="circle4" cx="40" cy="40" r="24" onclick="changeStatus(4)" />
+    <text class="text4" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" text-stroke="black" fill="yellow">Julie</text>
     </svg>
 <svg>
-  <circle id="circle5" class="circle5" cx="40" cy="40" r="24" />
-    <text x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="orange">Lucy</text>
+  <circle id="circle5" class="circle5" cx="40" cy="40" r="24" onclick="changeStatus(5)" />
+    <text class="text5" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="orange">Lucy</text>
     </svg>
 <svg>
-  <circle id="circle6" class="circle6" cx="40" cy="40" r="24" />
-    <text x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" text-stroke="black" fill="green">Harry Potter</text>
+  <circle id="circle6" class="circle6" cx="40" cy="40" r="24" onclick="changeStatus(6)" />
+    <text class="text6" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" text-stroke="black" fill="green">Harry Potter</text>
     </svg>
 
 </body>
