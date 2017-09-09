@@ -1,10 +1,10 @@
 <html>
 <head>
 <script type="text/javascript">
-  function changeStatus(clr) {
+  function changeStatus(stat) {
       // var circle1 = document.getElementById("circle1"); 
       // window.alert("Value of clr is circle" + [clr]);
-      var circlex = document.getElementById("circle" + [clr] );
+      var circlex = document.getElementById("circle" + [stat] );
       circlex.style.fill="white";
 
  // document.getElementById("blackball").setAttribute("r", 30);
@@ -13,12 +13,31 @@
 
  // window.alert("You probably want at least a couple of players. Please add some names.");
 }
+ function changeColour(ball,clr) {
+
+  var ballchange = document.getElementById("circle" + [ball] );
+  var textchange = document.getElementById("text" + [ball] );
+    ballchange.style.fill=[clr];
+    ballchange.style.stroke=[clr];
+    textchange.style.fill=[clr];
+ }
+
 </script>
 </head>
 <body>
 
 <!-- <p id="fiddle">test</p> -->
-<select>
+<!-- <select id="newclr" onchange="changeColour(1,this.value);"> -->
+<select id="player">
+  <option value="1">Player 1</option>
+    <option value="2">Player 2</option>
+      <option value="3">Player 3</option>
+        <option value="4">Player 4</option>
+          <option value="5">Player 5</option>
+            <option value="6">Player 6</option>
+</select>
+
+<select id="newclr">
   <option value="blue">blue</option>
   <option value="red">red</option>
   <option value="black">black</option>
@@ -31,10 +50,13 @@
   <option value="grey">grey</option>
 
 </select>
+<input type="button" value="change" onclick="changeColour(player.value,newclr.value);">
 <style>
+
   circle {
      stroke-width: 8;
   }
+
   circle.circle1 {
       stroke: blue;
       fill: blue;
@@ -88,49 +110,58 @@
 }
 
 .flex-item {
-  background: tomato;
+  /*background: tomato;*/
   padding: 5px;
-  width: 5px;
-  height: 5px;
-  margin-top: 10px;
+  width: 80px;
+  height: 80px;
+  /*margin-top: 10px;*/
   
-  line-height: 50px;
+  line-height: 150px;
   color: white;
-  font-weight: bold;
-  font-size: 3em;
-  text-align: center;
+
+  /*text-align: center;*/
 }
 
 </style>
-<ul class="flex-container">
-<li class="flex-item">
+<div class="flex-container">
+<div class="flex-item">
 <svg>
-  <circle circle1" id="circle1" cx="40" cy="40" r="24" onclick="changeStatus(1)" />
-  <text class="text1" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="blue">Jonathan</text>
+  <circle id="circle1" class="flex-item circle1" cx="40" cy="40" r="24" onclick="changeStatus(1)" />
+  <text id="text1" class="text1" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="blue">Ronald</text>
  </svg>
- </li>
-<li class="flex-item">
+ </div>
+
+<div class="flex-item">
 <svg>
   <circle id="circle2" class="flex-item circle2" cx="40" cy="40" r="24" onclick="changeStatus(2)" />
-    <text class="text2" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="black">Hermione</text>
+    <text id="text2" class="text2" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="black">Hermione</text>
 </svg>
-</li>
+ </div>
+
+<div class="flex-item">
 <svg>
   <circle id="circle3" class="flex-item circle3" cx="40" cy="40" r="24" onclick="changeStatus(3)" />
-    <text class="text3" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="red">Jack</text>
+    <text id="text3" class="text3" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="red">Neville</text>
     </svg>
-<svg>
+ </div>
+
+<div class="flex-item"><svg>
   <circle id="circle4" class="flex-item circle4" cx="40" cy="40" r="24" onclick="changeStatus(4)" />
-    <text class="text4" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="yellow">Julie</text>
+    <text id="text4" class="text4" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="yellow">Harry</text>
     </svg>
-<svg>
+ </div>
+
+<div class="flex-item"><svg>
   <circle id="circle5" class="flex-item circle5" cx="40" cy="40" r="24" onclick="changeStatus(5)" />
-    <text class="text5" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="orange">Lucy</text>
+    <text id="text5" class="text5" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="orange">Luna</text>
     </svg>
-<svg>
+ </div>
+
+<div class="flex-item"><svg>
   <circle id="circle6" class="flex-item circle6" cx="40" cy="40" r="24" onclick="changeStatus(6)" />
-    <text class="text6" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="green">Harry Potter</text>
+    <text id="text6" class="text6" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="green">Harry Potter</text>
     </svg>
-</ul>
+</div>
+</div>
 </body>
 </html>
