@@ -1,0 +1,167 @@
+<html>
+<head>
+<script type="text/javascript">
+  function changeStatus(stat) {
+      // var circle1 = document.getElementById("circle1"); 
+      // window.alert("Value of clr is circle" + [clr]);
+      var circlex = document.getElementById("circle" + [stat] );
+      circlex.style.fill="white";
+
+ // document.getElementById("blackball").setAttribute("r", 30);
+ // document.getElementById("fiddle").innerHTML = ""
+ 
+
+ // window.alert("You probably want at least a couple of players. Please add some names.");
+}
+ function changeColour(ball,clr) {
+
+  var ballchange = document.getElementById("circle" + [ball] );
+  var textchange = document.getElementById("text" + [ball] );
+    ballchange.style.fill=[clr];
+    ballchange.style.stroke=[clr];
+    textchange.style.fill=[clr];
+ }
+
+</script>
+</head>
+<body>
+
+<!-- <p id="fiddle">test</p> -->
+<!-- <select id="newclr" onchange="changeColour(1,this.value);"> -->
+<select id="player">
+  <option value="1">Player 1</option>
+    <option value="2">Player 2</option>
+      <option value="3">Player 3</option>
+        <option value="4">Player 4</option>
+          <option value="5">Player 5</option>
+            <option value="6">Player 6</option>
+</select>
+
+<select id="newclr">
+  <option value="blue">blue</option>
+  <option value="red">red</option>
+  <option value="black">black</option>
+  <option value="yellow">yellow</option>
+  <option value="orange">orange</option>
+  <option value="green">green</option>
+  <option value="brown">brown</option>
+  <option value="pink">pink</option>
+  <option value="purple">purple</option>
+  <option value="grey">grey</option>
+
+</select>
+<input type="button" value="change" onclick="changeColour(player.value,newclr.value);">
+<style>
+
+  circle {
+     stroke-width: 8;
+  }
+
+  circle.circle1 {
+      stroke: blue;
+      fill: blue;
+  }
+
+  circle.circle2 {
+      stroke: black;
+      fill: black;
+ 
+  }
+    circle.circle3 {
+      stroke: red;
+      fill: red;
+ 
+  }
+    circle.circle4 {
+      stroke: yellow;
+      fill: yellow;
+ 
+  }
+    circle.circle5 {
+      stroke: orange;
+      fill: orange;
+ 
+  }
+    circle.circle6 {
+      stroke: green;
+      fill: green;
+ 
+  }
+      text {
+/*  fill: none;*/
+  stroke: black;
+  stroke-width:.2px;
+  stroke-linejoin: round;
+      }
+
+.flex-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  
+  -webkit-flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.flex-item {
+  /*background: tomato;*/
+  padding: 5px;
+  width: 80px;
+  height: 80px;
+  /*margin-top: 10px;*/
+  
+  line-height: 150px;
+  color: white;
+
+  /*text-align: center;*/
+}
+
+</style>
+<div class="flex-container">
+<div class="flex-item">
+<svg>
+  <circle id="circle1" class="flex-item circle1" cx="40" cy="40" r="24" onclick="changeStatus(1)" />
+  <text id="text1" class="text1" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="blue">Harry</text>
+ </svg>
+ </div>
+
+<div class="flex-item">
+<svg>
+  <circle id="circle2" class="flex-item circle2" cx="40" cy="40" r="24" onclick="changeStatus(2)" />
+    <text id="text2" class="text2" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="black">Hermione</text>
+</svg>
+ </div>
+
+<div class="flex-item">
+<svg>
+  <circle id="circle3" class="flex-item circle3" cx="40" cy="40" r="24" onclick="changeStatus(3)" />
+    <text id="text3" class="text3" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="red">Ron</text>
+    </svg>
+ </div>
+
+<div class="flex-item"><svg>
+  <circle id="circle4" class="flex-item circle4" cx="40" cy="40" r="24" onclick="changeStatus(4)" />
+    <text id="text4" class="text4" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="yellow">Neville</text>
+    </svg>
+ </div>
+
+<div class="flex-item"><svg>
+  <circle id="circle5" class="flex-item circle5" cx="40" cy="40" r="24" onclick="changeStatus(5)" />
+    <text id="text5" class="text5" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="orange">Luna</text>
+    </svg>
+ </div>
+
+<div class="flex-item"><svg>
+  <circle id="circle6" class="flex-item circle6" cx="40" cy="40" r="24" onclick="changeStatus(6)" />
+    <text id="text6" class="text6" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="green">Ginni</text>
+    </svg>
+</div>
+</div>
+</body>
+</html>
