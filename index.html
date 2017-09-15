@@ -456,6 +456,9 @@ Future
 				document.getElementById("ball" + [ht]).title= balls[ht] + " ball alive";
 				document.getElementById("ball" + [ht]).value= balls[ht] + " ball alive";
 				document.getElementById("ball" + [ht]).alt= balls[ht] + " ball alive";
+				var circlex = document.getElementById("circle" + [ht] );
+      			var circlestate = circlex.style.fill.value;
+      			circlex.style.fill= balls[ht];
 				}
 			else
 				{
@@ -474,6 +477,10 @@ Future
 			document.getElementById("ball" + [ht]).title= balls[ht] + " ball dead";
 			document.getElementById("ball" + [ht]).alt= balls[ht] + " ball dead";
 			document.getElementById("ball" + [ht]).style.color="white";
+			var circlex = document.getElementById("circle" + [ht] );
+      		var circlestate = circlex.style.fill.value;
+      		circlex.style.fill="white";
+
 			}
 
 	}
@@ -613,6 +620,79 @@ h1,h2 {
     font-family: kailasa;
   }
 	
+	  circle {
+     stroke-width: 8;
+  }
+
+  circle.circle0 {
+      stroke: blue;
+      fill: blue;
+  }
+
+  circle.circle1 {
+      stroke: red;
+      fill: red;
+ 
+  }
+    circle.circle2 {
+      stroke: black;
+      fill: black;
+ 
+  }
+    circle.circle3 {
+      stroke: yellow;
+      fill: yellow;
+ 
+  }
+    circle.circle4 {
+      stroke: green;
+      fill: green;
+ 
+  }
+    circle.circle5 {
+      stroke: orange;
+      fill: orange;
+ 
+  }
+      text {
+/*  fill: none;*/
+  stroke: black;
+  stroke-width:.2px;
+  stroke-linejoin: round;
+      }
+
+.flex-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+    min-width: 200px;
+  max-width: 400px;
+  flex-basis: auto; /* default value */
+  flex-grow: 1;
+  
+  -webkit-flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.flex-item {
+  /*background: tomato;*/
+  padding: 5px;
+  width: 80px;
+  height: 80px;
+  /*margin-top: 10px;*/
+  
+  line-height: 150px;
+  color: white;
+
+  /*text-align: center;*/
+}
+
 	</style>
 
 	<!-- Forcing mobile devices to use my display properties -->
@@ -626,12 +706,12 @@ h1,h2 {
 <div id="setup">
 	<h1>Croquet Tracker</h1>
 	<form name="myForm">
-		<img class="band" src="images/bluestake.png" alt=""><label for="player1">Blue:</label><input type="text" placeholder="Player 1" name="Player 1" id="player1"><br>
-		<img class="band" src="images/redstake.png" alt=""><label for="player2">Red:</label><input type="text" placeholder="Player 2" name="Player 2" id="player2"><br>
-		<img class="band" src="images/blackstake.png" alt=""><label for="player3">Black:</label><input type="text" placeholder="Player 3" name="Player 3" id="player3"><br>
-		<img class="band" src="images/yellowstake.png" alt=""><label for="player4">Yellow:</label><input type="text" placeholder="Player 4" name="Player 4" id="player4"><br>
-		<img class="band" src="images/greenstake.png" alt=""><label for="player5">Green:</label><input type="text" placeholder="Player 5" name="Player 5" id="player5"><br>
-		<img class="band" src="images/orangestake.png" alt=""><label for="player6">Orange</label><input type="text" placeholder="Player 6" name="Player 6" id="player6"><p>
+		<img class="band" src="images/bluestake.png" alt=""><label for="player1">Player 1: </label><input type="text" placeholder="Player 1" name="Player 1" id="player1"><br>
+		<img class="band" src="images/redstake.png" alt=""><label for="player2">Player 2: </label><input type="text" placeholder="Player 2" name="Player 2" id="player2"><br>
+		<img class="band" src="images/blackstake.png" alt=""><label for="player3">Player 3: </label><input type="text" placeholder="Player 3" name="Player 3" id="player3"><br>
+		<img class="band" src="images/yellowstake.png" alt=""><label for="player4">Player 4: </label><input type="text" placeholder="Player 4" name="Player 4" id="player4"><br>
+		<img class="band" src="images/greenstake.png" alt=""><label for="player5">Player 5: </label><input type="text" placeholder="Player 5" name="Player 5" id="player5"><br>
+		<img class="band" src="images/orangestake.png" alt=""><label for="player6">Player 6: </label><input type="text" placeholder="Player 6" name="Player 6" id="player6"><p>
 
 	<label for "hps">Hoops/pegs:</label>
 	
@@ -676,6 +756,48 @@ h1,h2 {
 	<p />
 
 </div>
+
+<div class="flex-container">
+<div class="flex-item">
+<svg>
+  <circle id="circle0" class="flex-item circle0" cx="40" cy="40" r="24" onclick="changeStatus(0)" />
+  <text id="text0" class="text0" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="blue">Harry</text>
+ </svg>
+ </div>
+
+<div class="flex-item">
+<svg>
+  <circle id="circle1" class="flex-item circle1" cx="40" cy="40" r="24" onclick="changeStatus(1)" />
+    <text id="text1" class="text1" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="red">Hermione</text>
+</svg>
+ </div>
+
+<div class="flex-item">
+<svg>
+  <circle id="circle2" class="flex-item circle2" cx="40" cy="40" r="24" onclick="changeStatus(2)" />
+    <text id="text2" class="text2" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="black">Ron</text>
+    </svg>
+ </div>
+
+<div class="flex-item"><svg>
+  <circle id="circle3" class="flex-item circle3" cx="40" cy="40" r="24" onclick="changeStatus(3)" />
+    <text id="text3" class="text3" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="yellow">Neville</text>
+    </svg>
+ </div>
+
+<div class="flex-item"><svg>
+  <circle id="circle4" class="flex-item circle4" cx="40" cy="40" r="24" onclick="changeStatus(4)" />
+    <text id="text4" class="text4" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="green">Luna</text>
+    </svg>
+ </div>
+
+<div class="flex-item"><svg>
+  <circle id="circle5" class="flex-item circle5" cx="40" cy="40" r="24" onclick="changeStatus(5)" />
+    <text id="text5" class="text5" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="orange">Ginni</text>
+    </svg>
+</div>
+</div>
+
 <p>
 <div id="field">
 	<h2>Field</h2>
