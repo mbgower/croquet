@@ -367,6 +367,9 @@ Future
 					document.getElementById("ball" + [j]).value= balls[j] + " ball dead";
 					document.getElementById("ball" + [j]).alt= balls[j] + " ball dead";
 					document.getElementById("ball" + [j]).title= balls[j] + " ball dead";
+					document.getElementById("pos" + [j]).alt= balls[j] + " ball dead";
+					document.getElementById("pos" + [j]).title= balls[j] + " ball dead";
+
 					}
 
 				}
@@ -428,6 +431,9 @@ Future
 <!--				document.getElementByID("ball" + [j]).value=balls[j]  + "live"; -->
 				document.getElementById("ball" + [j]).style.color="White";
 				document.getElementById("ball" + [j]).disabled=false;
+				var circlex = document.getElementById("circle" + [j] );
+      			var circlestate = circlex.style.fill.value;
+      			circlex.style.fill= balls[j];				
 				}
 
 
