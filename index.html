@@ -214,8 +214,8 @@ Future
 			<!-- Enable Next Player function, now that we've started -->
 			document.getElementById("mainaction").src="images/" + balls[trn+1]  + "live.png";
 			document.getElementById("mainaction").value="Next turn, " +balls[trn+1];
-			document.getElementById("mainaction").title="Next turn, " +balls[trn+1];
-			document.getElementById("mainaction").alt="Next turn, " +balls[trn+1];			
+			document.getElementById("mainaction").title="Next turn, " +names[trn+1];
+			document.getElementById("mainaction").alt="Next turn, " +names[trn+1];			
 			document.getElementById("mainaction").onclick = nextTurn;
 			<!-- Put trn value to the max so that the nextTurn function trips the else statement -->
 			trn=names.length
@@ -272,14 +272,14 @@ Future
 			if (trn < names.length-1) {
 			document.getElementById("mainaction").src="images/" + balls[trn+1]  + "live.png";
 			document.getElementById("mainaction").value="Next turn, " +balls[trn+1];
-			document.getElementById("mainaction").title="Next turn, " +balls[trn+1];
-			document.getElementById("mainaction").alt="Next turn, " +balls[trn+1];	
+			document.getElementById("mainaction").title="Next turn, " +names[trn+1];
+			document.getElementById("mainaction").alt="Next turn, " +names[trn+1];	
 			} 
 		else {
 			document.getElementById("mainaction").src="images/" + balls[0]  + "live.png";
 			document.getElementById("mainaction").value="Next turn, " +balls[0];			
-			document.getElementById("mainaction").title="Next turn, " +balls[0];
-			document.getElementById("mainaction").alt="Next turn, " +balls[0];
+			document.getElementById("mainaction").title="Next turn, " +names[0];
+			document.getElementById("mainaction").alt="Next turn, " +names[0];
 			}
 			
 			<!-- Set focus on hoop -->
@@ -345,16 +345,19 @@ Future
 				if (openBalls[trn][j]=="live")
 					{
 					document.getElementById("ball" + [j]).style.display="inline";
+					document.getElementById("pos" + [j]).style.display="inline";	
 					document.getElementById("ball" + [j]).disabled=false;
 					document.getElementById("ball" + [j]).src="images/" + balls[j]  + "live.png";
 					document.getElementById("ball" + [j]).value= balls[j] + " ball alive";
 					document.getElementById("ball" + [j]).alt= balls[j] + " ball alive";
 					document.getElementById("ball" + [j]).title= balls[j] + " ball alive";
-
+					document.getElementById("pos" + [j]).alt= balls[j] + " ball alive";
+					document.getElementById("pos" + [j]).title= balls[j] + " ball alive";
 					}
 				else if (openBalls[trn][j]=="owns")
 					{
 					document.getElementById("ball" + [j]).style.display="none";
+					document.getElementById("pos" + [j]).style.display="none";					
 					}
 				else {	
 					document.getElementById("ball" + [j]).style.display="inline";
@@ -433,7 +436,7 @@ Future
 	}
 
 
-	<!-- I do not have the ability to unhit a ball in this version, since I am disabling the buttons. a feature worth having, I think. -->
+	
 	function hitBall(htr,ht) {
 
 		var timestamp = displayTime();
@@ -627,6 +630,7 @@ h1,h2 {
   circle.circle0 {
       stroke: blue;
       fill: blue;
+ /*     display: none;*/
   }
 
   circle.circle1 {
@@ -660,6 +664,9 @@ h1,h2 {
   stroke-width:.2px;
   stroke-linejoin: round;
       }
+      text.text0 {
+      	/*display: none;*/
+      }
 
 .flex-container {
   padding: 0;
@@ -680,7 +687,7 @@ h1,h2 {
   justify-content: space-around;
 }
 
-.flex-item {
+.flex-item  {
   /*background: tomato;*/
   padding: 5px;
   width: 80px;
@@ -692,7 +699,10 @@ h1,h2 {
 
   /*text-align: center;*/
 }
-
+	#pos0
+	 {
+		display: none;
+	}
 	</style>
 
 	<!-- Forcing mobile devices to use my display properties -->
@@ -758,41 +768,41 @@ h1,h2 {
 </div>
 
 <div class="flex-container">
-<div class="flex-item">
+<div id="pos0" class="flex-item">
 <svg>
-  <circle id="circle0" class="flex-item circle0" cx="40" cy="40" r="24" onclick="changeStatus(0)" />
+  <circle id="circle0" class="flex-item circle0" cx="40" cy="40" r="24" onclick="hitBall(trn,0)" />
   <text id="text0" class="text0" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="blue">Harry</text>
  </svg>
  </div>
 
-<div class="flex-item">
+<div id="pos1" class="flex-item">
 <svg>
-  <circle id="circle1" class="flex-item circle1" cx="40" cy="40" r="24" onclick="changeStatus(1)" />
+  <circle id="circle1" class="flex-item circle1" cx="40" cy="40" r="24" onclick="hitBall(trn,1)" />
     <text id="text1" class="text1" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="red">Hermione</text>
 </svg>
  </div>
 
-<div class="flex-item">
+<div id="pos2" class="flex-item">
 <svg>
-  <circle id="circle2" class="flex-item circle2" cx="40" cy="40" r="24" onclick="changeStatus(2)" />
+  <circle id="circle2" class="flex-item circle2" cx="40" cy="40" r="24" onclick="hitBall(trn,2)" />
     <text id="text2" class="text2" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="black">Ron</text>
     </svg>
  </div>
 
-<div class="flex-item"><svg>
-  <circle id="circle3" class="flex-item circle3" cx="40" cy="40" r="24" onclick="changeStatus(3)" />
+<div id="pos3" class="flex-item"><svg>
+  <circle id="circle3" class="flex-item circle3" cx="40" cy="40" r="24" onclick="hitBall(trn,3)" />
     <text id="text3" class="text3" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="yellow">Neville</text>
     </svg>
  </div>
 
-<div class="flex-item"><svg>
-  <circle id="circle4" class="flex-item circle4" cx="40" cy="40" r="24" onclick="changeStatus(4)" />
+<div id="pos4" class="flex-item"><svg>
+  <circle id="circle4" class="flex-item circle4" cx="40" cy="40" r="24" onclick="hitBall(trn,4)" />
     <text id="text4" class="text4" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="green">Luna</text>
     </svg>
  </div>
 
-<div class="flex-item"><svg>
-  <circle id="circle5" class="flex-item circle5" cx="40" cy="40" r="24" onclick="changeStatus(5)" />
+<div id="pos5" class="flex-item"><svg>
+  <circle id="circle5" class="flex-item circle5" cx="40" cy="40" r="24" onclick="hitBall(trn,5)" />
     <text id="text5" class="text5" x="14%" y="55%" alignment-baseline="middle" text-anchor="middle" fill="orange">Ginni</text>
     </svg>
 </div>
