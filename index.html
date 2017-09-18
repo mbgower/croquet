@@ -345,7 +345,8 @@ Future
 				if (openBalls[trn][j]=="live")
 					{
 					document.getElementById("ball" + [j]).style.display="inline";
-					document.getElementById("pos" + [j]).style.display="inline";	
+					document.getElementById("pos" + [j]).style.display="inline";
+					document.getElementById("text" + [j]).innerHTML= names[j]	;				
 					document.getElementById("ball" + [j]).disabled=false;
 					document.getElementById("ball" + [j]).src="images/" + balls[j]  + "live.png";
 					document.getElementById("ball" + [j]).value= balls[j] + " ball alive";
