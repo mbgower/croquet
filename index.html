@@ -139,7 +139,8 @@ Future
 				names.push(a);
 				}
 			}
-				<!-- The openBalls array includes information on the balls, as well as on whether the player is inbounds, and what hoop they are shooting for -->		
+				<!-- The openBalls array includes information on the balls, as well as on whether the player is inbounds, and what hoop they are shooting for -->
+				// 2017 What is with this second array?		
 				openBalls = [["owns","live","live","live","live","live","in",1],
 				["live","owns","live","live","live","live","in",1],
 				["live","live","owns","live","live","live","in",1],
@@ -150,7 +151,7 @@ Future
 
 				
 		}
-	<!-- Didn't write. Using to timestamp the game log -->
+	// <!-- Didn't write. Using to timestamp the game log -->
 	function displayTime() {
     var str = "";
 
@@ -190,6 +191,7 @@ Future
 	
 	function playTurn() {
 		trn=0 ;
+		// 2017 I should now be able to wipe out this if statement
 		if (names[trn]==null) {
 			window.alert("You probably want at least a couple of players. Please add some names.");
 		}
@@ -695,12 +697,13 @@ h1,h2 {
   flex-grow: 1;
   
   -webkit-flex-flow: row wrap;
-  justify-content: space-around;
+  justify-content: center;
+/*  justify-content: space-around;*/
 }
 		
 .flex-item  {
   /*background: tomato;*/
-  padding: 5px;
+  padding: 10px;
   width: 80px;
   height: 80px;
   /*margin-top: 10px;*/
@@ -716,13 +719,13 @@ h1,h2 {
 		display: none;
 	}
 
-	#pos4 {
+/*	#pos4 {
 		padding-left: 55px;
 	}
 
 	#pos5 {
 		padding-right: 55px; 
-	}
+	}*/
 	</style>
 
 	<!-- Forcing mobile devices to use my display properties -->
