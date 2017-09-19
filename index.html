@@ -121,11 +121,15 @@ Future
 			if (a=="" || a==null) {
 					if ( b=="" || b==null )
 						{
+							if (i < 3) {
+								window.alert("You need at least a couple of players.");
+								return false;
+							}
 						}
 					else
 						{
-						
-						("Please populate player fields in order. You do not need to have 6 people, but you can't skip a colour. First player is " + [j] );
+	
+						window.alert("Please populate player fields in order. You can't skip a colour. Player " + [j-1] + " is missing. If you have different coloured balls, change the colours by pressing them." );
 						return false;
 					}
 				}
