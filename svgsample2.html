@@ -5,13 +5,21 @@
       // var circle1 = document.getElementById("circle1"); 
       // window.alert("Value of clr is circle" + [clr]);
       var circlex = document.getElementById("circle" + [stat] );
+      var circlestate = circlex.style.fill.value;
+      if (circlexstate=="white") {
+
+      }
       circlex.style.fill="white";
 
  // document.getElementById("blackball").setAttribute("r", 30);
  // document.getElementById("fiddle").innerHTML = ""
  
 
- // window.alert("You probably want at least a couple of players. Please add some names.");
+ // window.alert("Set the ball live again?");
+ var r=window.confirm("Do you want to set the ball active again?");
+      if (r==true)
+        {
+
 }
  function changeColour(ball,clr) {
 
@@ -37,22 +45,63 @@
             <option value="6">Player 6</option>
 </select>
 
-<select id="newclr">
-  <option value="blue">blue</option>
-  <option value="red">red</option>
-  <option value="black">black</option>
-  <option value="yellow">yellow</option>
-  <option value="orange">orange</option>
-  <option value="green">green</option>
-  <option value="brown">brown</option>
-  <option value="pink">pink</option>
-  <option value="purple">purple</option>
-  <option value="grey">grey</option>
+<select class="ballcolour" id="newclr">
+  <option class="clr1" value="blue">blue</option>
+  <option class="clr2" value="red">red</option>
+  <option class="clr3" value="black">black</option>
+  <option class="clr4" value="yellow">yellow</option>
+  <option class="clr5" value="orange">orange</option>
+  <option class="clr6" value="green">green</option>
+  <option class="clr7" value="brown">brown</option>
+  <option class="clr8" value="pink">pink</option>
+  <option class="clr9" value="purple">purple</option>
+  <option class="clr10" value="grey">grey</option>
 
 </select>
 <input type="button" value="change" onclick="changeColour(player.value,newclr.value);">
+<!-- Try using https://developer.mozilla.org/en-US/docs/Web/SVG/Element/symbol -->
 <style>
 
+select.ballcolour option.clr1
+{
+    background-color: blue;
+}
+select.ballcolour option.clr2
+{
+    background-color: red;
+}
+select.ballcolour option.clr3
+{
+    background-color: black;
+}
+select.ballcolour option.clr4
+{
+    background-color: yellow;
+}
+select.ballcolour option.clr5
+{
+    background-color: green;
+}
+select.ballcolour option.clr6
+{
+    background-color: orange;
+}
+select.ballcolour option.clr1
+{
+    background-color: blue;
+}
+select.ballcolour option.clr1
+{
+    background-color: blue;
+}
+select.ballcolour option.clr1
+{
+    background-color: blue;
+}
+select.ballcolour option.clr1
+{
+    background-color: blue;
+}
   circle {
      stroke-width: 8;
   }
@@ -104,6 +153,10 @@
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+    min-width: 200px;
+  max-width: 400px;
+  flex-basis: auto; /* default value */
+  flex-grow: 1;
   
   -webkit-flex-flow: row wrap;
   justify-content: space-around;
