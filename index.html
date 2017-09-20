@@ -112,7 +112,7 @@ Future
 				["live","live","live","owns","live","live","in",1],
 				["live","live","live","live","owns","live","in",1],
 				["live","live","live","live","live","owns","in",1]];
-				playTurn()
+				startGame()
 
 				
 		}
@@ -154,47 +154,44 @@ Future
 		}
 
 	
-	function playTurn() {
+	function startGame() {
 		trn=0 ;
 		// 2017 I should now be able to wipe out this if statement
-		if (names[trn]==null) {
-			window.alert("You probably want at least a couple of players. Please add some names.");
-		}
-		else {
-			<!-- Hide the Setup and open the game view-->
-			document.getElementById("setup").style.display="none";
-			document.getElementById("shooting").style.display="inline";
-			document.getElementById("secondary").style.display="none";
 
-			document.body.style.backgroundImage="none";
-			document.getElementById("summary").style.display="inline";
-			document.getElementById("bounds").style.display="inline";
-			document.getElementById("bounds").disabled=false;
-			document.getElementById("bounds").style.color="Black";
-<!--			document.getElementById("playbyplay").style.display="none"; -->
-			<!-- Populate hoop value -->
-			var select = document.getElementById("hps");
-			totHoops= select.options[select.selectedIndex].value;
-			<!-- Populate "playbyplay" log -->
-			var starttime = displayTime();
-			document.getElementById("playbyplay").innerHTML="<h2>Game Summary</h2>";
-			document.getElementById("playbyplay").innerHTML+= [starttime] + ": ";
-			document.getElementById("playbyplay").innerHTML +="Game begins, hoops/pegs: " + [totHoops] + "<br />";	
-			<!-- Populate the actions menu -->
-			buildActionsMenu();
-			<!-- Enable Next Player function, now that we've started -->
-			document.getElementById("mainaction").src="images/" + balls[trn+1]  + "live.png";
-			document.getElementById("mainaction").value="Next turn, " +balls[trn+1];
-			document.getElementById("mainaction").title="Next turn, " +names[trn+1];
-			document.getElementById("mainaction").alt="Next turn, " +names[trn+1];			
-			document.getElementById("mainaction").onclick = nextTurn;
-			<!-- Put trn value to the max so that the nextTurn function trips the else statement -->
-			trn=names.length
-			nextTurn([trn])
-			<!-- Set focus to top -->
-			document.getElementById("nexthoop").focus();
+	
+		<!-- Hide the Setup and open the game view-->
+		document.getElementById("setup").style.display="none";
+		document.getElementById("shooting").style.display="inline";
+		document.getElementById("secondary").style.display="none";
 
-		}
+		document.body.style.backgroundImage="none";
+		document.getElementById("summary").style.display="inline";
+		document.getElementById("bounds").style.display="inline";
+		document.getElementById("bounds").disabled=false;
+		document.getElementById("bounds").style.color="Black";
+		<!--			document.getElementById("playbyplay").style.display="none"; -->
+		<!-- Populate hoop value -->
+		var select = document.getElementById("hps");
+		totHoops= select.options[select.selectedIndex].value;
+		<!-- Populate "playbyplay" log -->
+		var starttime = displayTime();
+		document.getElementById("playbyplay").innerHTML="<h2>Game Summary</h2>";
+		document.getElementById("playbyplay").innerHTML+= [starttime] + ": ";
+		document.getElementById("playbyplay").innerHTML +="Game begins, hoops/pegs: " + [totHoops] + "<br />";	
+		<!-- Populate the actions menu -->
+		buildActionsMenu();
+		<!-- Enable Next Player function, now that we've started -->
+		document.getElementById("mainaction").src="images/" + balls[trn+1]  + "live.png";
+		document.getElementById("mainaction").value="Next turn, " +balls[trn+1];
+		document.getElementById("mainaction").title="Next turn, " +names[trn+1];
+		document.getElementById("mainaction").alt="Next turn, " +names[trn+1];			
+		document.getElementById("mainaction").onclick = nextTurn;
+		<!-- Put trn value to the max so that the nextTurn function trips the else statement -->
+		trn=names.length
+		nextTurn([trn])
+		<!-- Set focus to top -->
+		document.getElementById("nexthoop").focus();
+	
 	}
 
 	function nextTurn() {
