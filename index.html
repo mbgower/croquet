@@ -162,7 +162,7 @@ Future
 		document.getElementById("setup").style.display="none";
 		document.getElementById("shooting").style.display="inline";
 		document.getElementById("newshooting").style.display="flex";		
-		document.getElementById("secondary").style.display="none";
+		// document.getElementById("secondary").style.display="none";
 
 		document.body.style.backgroundImage="none";
 		document.getElementById("summary").style.display="inline";
@@ -220,14 +220,14 @@ Future
 			buildActionsMenu()
 			// 2017 I can loose this prime and secondary stuff. css handles
 		<!-- position the second line of balls correctly -->
-			if (trn > 3) {
-				document.getElementById("prime").style.display="none";
-				document.getElementById("secondary").style.display="inline";
-				}
-			else {
-				document.getElementById("prime").style.display="inline";
-				document.getElementById("secondary").style.display="none";
-				}
+			// if (trn > 3) {
+			// 	document.getElementById("prime").style.display="none";
+			// 	document.getElementById("secondary").style.display="inline";
+			// 	}
+			// else {
+			// 	document.getElementById("prime").style.display="inline";
+			// 	document.getElementById("secondary").style.display="none";
+			// 	}
 			<!-- Populate new player and log values -->
 			var timestamp = displayTime();
 			document.getElementById("playbyplay").innerHTML += [timestamp] + ": ";
@@ -288,7 +288,7 @@ Future
 			
 			<!-- Update display -->
 			document.getElementById("setup").style.display="none";
-			document.getElementById("secondary").style.display="none";
+			// document.getElementById("secondary").style.display="none";
 			document.body.style.backgroundImage="none";
 			<!-- Set focus on hoop -->
 			document.getElementById("nexthoop").focus();
@@ -747,16 +747,7 @@ h1,h2 {
 	<!-- I believe I can just lift the colour values out of the array, and form this whole thing that way; I'm not sure the balls are even used here... Isn't it now done in setupBalls?  -->
         <div align="center"><input type="image" src="images/1hoop.png" id="nexthoop" value="Hoop 1" onclick="clearHoop(trn,openBalls[trn][7]);" /></div>
  <br>
-		<input type="image" src="images/bluelive.png" id="ball0" style="color:white" title="Blue Ball" alt="Blue ball" value="Blue ball" onclick="hitBall(trn,0);" />
-		<input type="image" src="images/redlive.png" id="ball1" style="color:white" title= "Red ball" alt="Red ball" value="Red ball" onclick="hitBall(trn,1);" />
-        <input type="image" src="images/blacklive.png" id="ball2" style="color:white" value="Black ball" onclick="hitBall(trn,2);" />
-		<!-- secondary location for the second line -->
-		<img src="shim.png" alt="" height="1" width="50" id="secondary" border="0"> 
-        <input type="image" src="images/yellowlive.png" id="ball3" style="color:white" value="Yellow ball" onclick="hitBall(trn,3);" />
-		<!-- prime location for the second line -->
-		<img src="shim.png" alt="" height="1" width="50" id="prime" border="0"> 
-        <input type="image" src="images/greenlive.png" id="ball4" style="color:white" value="Green ball" onclick="hitBall(trn,4);" />
-        <input type="image" src="images/orangelive.png" id="ball5" style="color:white" value="Orange ball" onclick="hitBall(trn,5);" />
+
 
 	<p />
 
