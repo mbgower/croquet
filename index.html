@@ -41,7 +41,7 @@ experimenting with spacing to adjust to iphone 4
 7.8
 - false start
 7.9
-- reduced menu options to context (e.g, if only 3 players playing, only show those balls -- and only the balls other than active player)
+- reduced menu options to context (e.g, if only 3 players playing, only show those balls - and only the balls other than active player)
 Bugs
 - landmarks being announced strangely in iOS
 - after exposing menu, lose formatting on action menu
@@ -74,7 +74,7 @@ Future
 
 
 
-	<!-- The validation is now working. Now I need to consider 1) stripping out single and double quotes 2) adding the names to the array -->
+	<!-- The validation is now working. Now I need to consider 1 stripping out single and double quotes 2 adding the names to the array -->
 	function validateForm()
 		{ for (var i = 1; i < 7; i++)
 			{
@@ -156,8 +156,6 @@ Future
 	
 	function startGame() {
 		trn=0 ;
-		// 2017 I should now be able to wipe out this if statement
-
 	
 		<!-- Hide the Setup and open the game view-->
 		document.getElementById("setup").style.display="none";
@@ -170,9 +168,11 @@ Future
 		document.getElementById("bounds").disabled=false;
 		document.getElementById("bounds").style.color="Black";
 		<!--			document.getElementById("playbyplay").style.display="none"; -->
+// 2017 Hoop is something that can be done with svg and text
 		<!-- Populate hoop value -->
 		var select = document.getElementById("hps");
 		totHoops= select.options[select.selectedIndex].value;
+		// 2017 Play by play could be done a lot more elegantly
 		<!-- Populate "playbyplay" log -->
 		var starttime = displayTime();
 		document.getElementById("playbyplay").innerHTML="<h2>Game Summary</h2>";
@@ -181,6 +181,7 @@ Future
 		<!-- Populate the actions menu -->
 		buildActionsMenu();
 		<!-- Enable Next Player function, now that we've started -->
+		// 2017 This is where I put in svg for next player
 		document.getElementById("mainaction").src="images/" + balls[trn+1]  + "live.png";
 		document.getElementById("mainaction").value="Next turn, " +balls[trn+1];
 		document.getElementById("mainaction").title="Next turn, " +names[trn+1];
@@ -215,6 +216,7 @@ Future
 			{
 		<!-- Set up action  menu for player -->
 			buildActionsMenu()
+			// 2017 I can loose this prime and secondary stuff. css handles
 		<!-- position the second line of balls correctly -->
 			if (trn > 3) {
 				document.getElementById("prime").style.display="none";
@@ -310,9 +312,12 @@ Future
 	
 	function setupBalls(trn) {
 				for (var j = 0; j < names.length; j++) {
+				var circlex = document.getElementById("circle" + [j] );
 				if (openBalls[trn][j]=="live")
 					{
 					document.getElementById("ball" + [j]).style.display="inline";
+					// var circlestate = circlex.style.fill.value;
+      				circlex.style.fill= balls[j];
 					document.getElementById("pos" + [j]).style.display="inline";
 					document.getElementById("text" + [j]).innerHTML= names[j]	;				
 					document.getElementById("ball" + [j]).disabled=false;
@@ -330,6 +335,7 @@ Future
 					}
 				else {	
 					document.getElementById("ball" + [j]).style.display="inline";
+					circlex.style.fill= "white";
 					<!-- document.getElementById("ball" + [j]).disabled=true; -->
 					document.getElementById("ball" + [j]).src="images/" + balls[j]  + "dead.png";
 					document.getElementById("ball" + [j]).value= balls[j] + " ball dead";
@@ -376,14 +382,14 @@ Future
 				window.alert(names[htr] + " has finished!");
 				document.getElementById("playbyplay").innerHTML +="<img style='width:1em; height:1em; vertical-align: bottom;' src='images/" + balls[trn] + "live.png' alt='" + balls[trn] +"'> " + names[htr] + " pegs out" + "<br />";
 			}
-			<!-- Check if the hitter is pushing someone else's ball through the hoop -->
+			// <!-- Check if the hitter is pushing someone else's ball through the hoop -->
 			else if ([trn]!=htr) 
 			{
 				window.alert(names[trn] + " pushed player through; " + names[htr] + " will be shooting for " + openBalls[htr][hp]);
 				document.getElementById("playbyplay").innerHTML +="<img style='width:1em; height:1em; vertical-align: bottom;' src='images/" + balls[trn] + "live.png' alt='" + balls[trn] +"'> " +names[trn] + " pushed " + names[htr] + " through <img style='width:1em; height:1em; vertical-align: middle;' src='images/" + hoopPassed + "hoop.png' alt='hoop " + hoopPassed + "'> <br />";
 				
 			}
-			<!-- Advanced the hitter's hoop -->
+			// <!-- Advanced the hitter's hoop -->
 			else
 			{
 		 document.getElementById("nexthoop").src="images/" + openBalls[trn][hp] + "hoop.png";
@@ -456,7 +462,6 @@ Future
 			document.getElementById("ball" + [ht]).alt= balls[ht] + " ball dead";
 			document.getElementById("ball" + [ht]).style.color="white";
 			var circlex = document.getElementById("circle" + [ht] );
-      		var circlestate = circlex.style.fill.value;
       		circlex.style.fill="white";
 
 			}
