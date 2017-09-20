@@ -142,6 +142,7 @@ Future
 
 	function preGame() {
 		document.getElementById("shooting").style.display="none";
+		document.getElementById("newshooting").style.display="none";
 		document.getElementById("field").style.display="none";
 		document.getElementById("summary").style.display="none";
 		document.getElementById("bounds").style.display="none";
@@ -160,6 +161,7 @@ Future
 		<!-- Hide the Setup and open the game view-->
 		document.getElementById("setup").style.display="none";
 		document.getElementById("shooting").style.display="inline";
+		document.getElementById("newshooting").style.display="flex";		
 		document.getElementById("secondary").style.display="none";
 
 		document.body.style.backgroundImage="none";
@@ -259,6 +261,7 @@ Future
 	function showShooting(){
 			<!-- document.getElementById("current").style.display="inline";	 -->
 			document.getElementById("shooting").style.display="inline";
+			document.getElementById("newshooting").style.display="flex";
 			<!-- alter controls -->
 			document.getElementById("summary").style.display="inline";
 			document.getElementById("controls").style.display="inline";
@@ -295,6 +298,7 @@ Future
 	function showMenu(){
 			<!-- alter view -->
 			document.getElementById("shooting").style.display="none";
+			document.getElementById("newshooting").style.display="none";
 			document.getElementById("field").style.display="none";
 			document.getElementById("controls").style.display="none";
 			document.getElementById("playbyplay").style.display="none";
@@ -481,6 +485,7 @@ Future
 			{
 			<!-- alter view -->
 			document.getElementById("shooting").style.display="none";
+			document.getElementById("newshooting").style.display="none";			
 			document.getElementById("field").style.display="inline";
 			document.body.style.backgroundImage="url('images/stake.png')";			
 			<!-- alter main control -->
@@ -757,7 +762,7 @@ h1,h2 {
 
 </div>
 
-<div class="flex-container">
+<div id="newshooting" class="flex-container">
 <div id="pos0" class="flex-item">
 <svg>
   <circle id="circle0" class="flex-item circle0" cx="40" cy="40" r="34" onclick="hitBall(trn,0)" />
