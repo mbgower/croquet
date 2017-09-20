@@ -73,41 +73,6 @@ Future
     var balls = ["blue","red","black","yellow","green","orange","pink"];
 
 
-<!-- This function loads player values from an input field and displays them in a textarea. -->
-<!-- It will need significant revisions to match the wireframe -->
-	function getPlayers() {
-		var str = document.getElementById("prospect");
-		names.push(str.value);
-		str.value = "";
-		str.focus();
-		var area = document.getElementById("txtArea");
-		area.value = "";
-		for (var i = 0; i < names.length; i++) {
-			if (i>=6)
-			<!-- user has just entered 7th name. can't do this, so start game -->
-				{
-				window.alert("Only 6 people can play! We're full, so let's start the game.");
-				names.pop();
-				playTurn();
-				}
-	
-			else 
-			<!-- match names array to new array with appropriate values for ball and hoop values. -->
-			<!-- this could be done more elegantly. Currently just overwrites same values -->
-			<!-- keeping it like this because it helps me visualize the array -->
-			<!-- Javascript does not support multidimensional arrays -->
-				{
-				openBalls = [["owns","live","live","live","live","live","in",1],
-				["live","owns","live","live","live","live","in",1],
-				["live","live","owns","live","live","live","in",1],
-				["live","live","live","owns","live","live","in",1],
-				["live","live","live","live","owns","live","in",1],
-				["live","live","live","live","live","owns","in",1]];
-
-				area.value += names[i] + " is playing "+ balls[i] + "." + "\n"; 		
-				}
-		}
-	}
 
 	<!-- The validation is now working. Now I need to consider 1) stripping out single and double quotes 2) adding the names to the array -->
 	function validateForm()
@@ -574,7 +539,7 @@ Future
 				}
 			}
 	}
-	
+	// 2017 Want to make this menu look way better and hopefully include some ball icons
 	function buildActionsMenu() {
 					document.getElementById("actionmenu").innerHTML="";
 					document.getElementById("actionmenu").innerHTML+="<ul><li><a href=# onclick='hitBall(trn,6);hideMenu()' />Shooter out of bounds</a></li>";
