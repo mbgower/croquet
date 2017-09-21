@@ -220,16 +220,7 @@ Future
 			{
 		<!-- Set up action  menu for player -->
 			buildActionsMenu()
-			// 2017 I can loose this prime and secondary stuff. css handles
-		<!-- position the second line of balls correctly -->
-			if (trn > 3) {
-				document.getElementById("prime").style.display="none";
-				document.getElementById("secondary").style.display="inline";
-				}
-			else {
-				document.getElementById("prime").style.display="inline";
-				document.getElementById("secondary").style.display="none";
-				}
+
 			<!-- Populate new player and log values -->
 			var timestamp = displayTime();
 			document.getElementById("playbyplay").innerHTML += [timestamp] + ": ";
