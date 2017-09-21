@@ -156,7 +156,9 @@ Future
 
 	
 	function startGame() {
-		trn=0 ;
+		// trn=0 ;
+		trn=names.length;
+		
 	
 		<!-- Hide the Setup and open the game view-->
 		document.getElementById("setup").style.display="none";
@@ -322,6 +324,7 @@ Future
 					document.getElementById("ball" + [j]).style.display="inline";
 					// var circlestate = circlex.style.fill.value;
       				circlex.style.fill= balls[j];
+      				circlex.style.stroke= balls[j];
 					document.getElementById("pos" + [j]).style.display="inline";
 					document.getElementById("text" + [j]).innerHTML= names[j]	;				
 					document.getElementById("ball" + [j]).disabled=false;
@@ -339,7 +342,9 @@ Future
 					}
 				else {	
 					document.getElementById("ball" + [j]).style.display="inline";
+					document.getElementById("pos" + [j]).style.display="inline";					
 					circlex.style.fill= "white";
+					circlex.style.stroke= balls[j];
 					<!-- document.getElementById("ball" + [j]).disabled=true; -->
 					document.getElementById("ball" + [j]).src="images/" + balls[j]  + "dead.png";
 					document.getElementById("ball" + [j]).value= balls[j] + " ball dead";
