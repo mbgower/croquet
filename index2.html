@@ -697,10 +697,9 @@ padding-right: 55px;
 
 			<div id="shooting">
 
-				<div id="current">
-				</div>
+
 				<!-- I believe I can just lift the colour values out of the array, and form this whole thing that way; I'm not sure the balls are even used here... Isn't it now done in setupBalls?  -->
-				<div align="center"><input type="image" src="images/1hoop.png" id="nexthoop" value="Hoop 1" onclick="clearHoop(trn,openBalls[trn][7]);" /></div>
+
 				<br>
 				<input type="image" src="images/bluelive.png" id="ball0" style="color:white" title="Blue Ball" alt="Blue ball" value="Blue ball" onclick="hitBall(trn,0);" />
 				<input type="image" src="images/redlive.png" id="ball1" style="color:white" title= "Red ball" alt="Red ball" value="Red ball" onclick="hitBall(trn,1);" />
@@ -718,7 +717,12 @@ padding-right: 55px;
 			</div>
 
 			<div id="newshooting" class="flex-group">
-				<div class="flex-container" id="hoopview" align="center"><input type="image" src="images/1hoop.png" id="nexthoop" value="Hoop 1" onclick="clearHoop(trn,openBalls[trn][7]);" />
+				<div class="flex-container" id="current">
+				</div>
+
+				<div class="flex-container" align="center">
+					<input type="image" src="images/1hoop.png" id="nexthoop" value="Hoop 1" onclick="clearHoop(trn,openBalls[trn][7]);" />
+					
 				</div>
 				<div class="flex-container">
 
