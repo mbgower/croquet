@@ -94,7 +94,7 @@ Future
 					else
 						{
 	
-						window.alert("Please populate player fields in order. You can't skip a colour. Player " + [j-1] + " is missing. If you have different coloured balls, change the colours by pressing them." );
+						window.alert("Please populate player fields in order. You can't skip a colour. Player " + [j-1] + " is missing. If you have different coloured balls, change the colours by selecting them." );
 						return false;
 					}
 				}
@@ -162,7 +162,7 @@ Future
 	
 		<!-- Hide the Setup and open the game view-->
 		document.getElementById("setup").style.display="none";
-		document.getElementById("shooting").style.display="inline";
+		// document.getElementById("shooting").style.display="inline";
 		document.getElementById("newshooting").style.display="flex";		
 		document.getElementById("secondary").style.display="none";
 
@@ -253,7 +253,7 @@ Future
 	}
 	function showShooting(){
 			<!-- document.getElementById("current").style.display="inline";	 -->
-			document.getElementById("shooting").style.display="inline";
+			// document.getElementById("shooting").style.display="inline";
 			document.getElementById("newshooting").style.display="flex";
 			<!-- alter controls -->
 			document.getElementById("summary").style.display="inline";
@@ -759,6 +759,7 @@ h1,h2 {
 </div>
 
 <div id="newshooting" class="flex-container">
+<div id="hoopview" align="center"><input type="image" src="images/1hoop.png" id="nexthoop" value="Hoop 1" onclick="clearHoop(trn,openBalls[trn][7]);" /></div>
 <div id="pos0" class="flex-item">
 <svg>
   <circle id="circle0" class="flex-item circle0" cx="40" cy="40" r="34" onclick="hitBall(trn,0)" />
