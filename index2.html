@@ -197,6 +197,7 @@ function nextTurn() {
 
 		<!-- Set focus on hoop -->
 		document.getElementById("nexthoop").focus();
+		
 	}
 }
 function showShooting(){
@@ -309,9 +310,11 @@ function clearHoop(htr,hp) {
 		else
 		{
 			openBalls[trn][7]=openBalls[trn][7]-1
+
 			document.getElementById("nexthoop").src="images/" + openBalls[trn][7] + "hoop.png";
 			document.getElementById("nexthoop").value="hoop" + openBalls[trn][7];
 			document.getElementById("nexthoop").title="hoop" + openBalls[trn][7];
+			document.getElementById("hoopsvg").innerHTML= openBalls[trn][7];
 			<!--mg this will break? add:  + openBalls[trn][7] then I changed 'hoop' to 'spinach' -->
 			document.getElementById("playbyplay").innerHTML +="<img style='width:1em; height:1em; vertical-align: bottom;' src='images/" + balls[trn] + "live.png' alt='" + balls[trn] +"'> " +names[trn] + " put back to <img style='width:1em; height:1em; vertical-align: middle;' src='images/" + openBalls[trn][7] + "hoop.png' alt='hoop " + openBalls[trn][7] + "'> <br />";
 		}
@@ -340,9 +343,10 @@ else if ([trn]!=htr)
 // <!-- Advanced the hitter's hoop -->
 else
 {
+	document.getElementById("hoopsvg").innerHTML= openBalls[trn][7];
 	document.getElementById("nexthoop").src="images/" + openBalls[trn][hp] + "hoop.png";
 	document.getElementById("nexthoop").value='hoop' + openBalls[trn][7]; 
-	document.getElementById("nexthoop").title='hoop' + openBalls[trn][7]
+	document.getElementById("nexthoop").title='hoop' + openBalls[trn][7];
 	document.getElementById("playbyplay").innerHTML +="<img style='width:1em; height:1em; vertical-align: bottom;' src='images/" + balls[trn] + "live.png' alt='" + balls[trn] +"'> " +names[trn] + " clears <img style='width:1em; height:1em; vertical-align: middle;' src='images/" + hoopPassed + "hoop.png' alt='hoop " + hoopPassed + "'> <br />";
 	for (var j = 0; j < names.length; j++) {
 		if (openBalls[trn][j]=="dead")
@@ -646,6 +650,18 @@ text.text0 {
 	display: none;
 }
 
+#hoopsvg {
+
+    border-radius: 25px 25px 0px 0px;
+    border: 20px solid SaddleBrown;
+    border-bottom-style: none;
+    padding: 20px;
+    width: 20px;
+    height: 80px;
+    color: SaddleBrown;
+    font-size: xx-large;
+    font-weight: 900;    
+}
 /*	#pos4 {
 padding-left: 55px;
 }
@@ -721,6 +737,7 @@ padding-right: 55px;
 				</div>
 
 				<div class="flex-container" align="center">
+					<p id="hoopsvg" onclick="clearHoop(trn,openBalls[trn][7])"">1</p>
 					<input type="image" src="images/1hoop.png" id="nexthoop" value="Hoop 1" onclick="clearHoop(trn,openBalls[trn][7]);" />
 					
 				</div>
