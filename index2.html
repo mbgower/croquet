@@ -109,8 +109,8 @@ function preGame() {
 
 
 function startGame() {
-// trn=0 ;
-trn=names.length;
+trn=0 ;
+// trn=names.length;
 // <!-- Hide the Setup and open the game view-->
 document.getElementById("setup").style.display="none";
 // document.getElementById("shooting").style.display="inline";
@@ -144,7 +144,7 @@ document.getElementById("mainaction").onclick = nextTurn;
 trn=names.length
 nextTurn([trn])
 // <!-- Set focus to top -->
-document.getElementById("nexthoop").focus();
+document.getElementById("hoopsvg").focus();
 }
 
 function nextTurn() {
@@ -174,10 +174,12 @@ function nextTurn() {
 		document.getElementById("playbyplay").innerHTML += [timestamp] + ": ";
 		document.getElementById("current").innerHTML="<p align='center'><input type='image' src='images/" +  balls[trn] + "live.png' aria-haspopup='true' width='60' height='60' value='" + balls[trn] + "ball active' title = '" + balls[trn] + "ball active' onclick='showMenu();' alt='" + balls[trn] + " ball active'> " + "<br /><strong>" + names[trn] + " shooting</strong></p>";
 		document.getElementById("playbyplay").innerHTML +="<img style='width:1em; height:1em; vertical-align: middle;' src='images/" + balls[trn] + "live.png' alt='" + balls[trn] +"'> " +names[trn] + " is up, shooting for <img style='width:1em; height:1em; vertical-align: middle;' src='images/" + openBalls[trn][7] + "hoop.png' alt='hoop " + openBalls[trn][7] + "'><br />";
-		document.getElementById("nexthoop").src="images/" + openBalls[trn][7] + "hoop.png";
-		document.getElementById("nexthoop").value='hoop' + openBalls[trn][7];
+		document.getElementById("hoopsvg").innerHTML=openBalls[trn][7];
+		// document.getElementById("nexthoop").src="images/" + openBalls[trn][7] + "hoop.png";
+		// document.getElementById("nexthoop").value='hoop' + openBalls[trn][7];
 		<!-- do I need to put in an ALT and TITLE, or is the value considered acceptable? -->			
-		document.getElementById("nexthoop").setAttribute('aria-describedby','current');
+	// Need to add in this aria for hoopsvg?
+		// document.getElementById("nexthoop").setAttribute('aria-describedby','current');
 		document.getElementById("status").innerHTML = ""
 		<!-- Get the balls displayed with appropriate status -->
 		setupBalls([trn])
@@ -196,7 +198,8 @@ function nextTurn() {
 		}
 
 		<!-- Set focus on hoop -->
-		document.getElementById("nexthoop").focus();
+		document.getElementById("hoopsvg").focus();
+
 	}
 }
 function showShooting(){
@@ -232,7 +235,7 @@ document.getElementById("setup").style.display="none";
 document.getElementById("secondary").style.display="none";
 document.body.style.backgroundImage="none";
 <!-- Set focus on hoop -->
-document.getElementById("nexthoop").focus();
+document.getElementById("hoopsvg").focus();
 
 }
 
@@ -309,9 +312,11 @@ function clearHoop(htr,hp) {
 		else
 		{
 			openBalls[trn][7]=openBalls[trn][7]-1
-			document.getElementById("nexthoop").src="images/" + openBalls[trn][7] + "hoop.png";
-			document.getElementById("nexthoop").value="hoop" + openBalls[trn][7];
-			document.getElementById("nexthoop").title="hoop" + openBalls[trn][7];
+
+			// document.getElementById("nexthoop").src="images/" + openBalls[trn][7] + "hoop.png";
+			// document.getElementById("nexthoop").value="hoop" + openBalls[trn][7];
+			// document.getElementById("nexthoop").title="hoop" + openBalls[trn][7];
+			document.getElementById("hoopsvg").innerHTML= openBalls[trn][7];
 			<!--mg this will break? add:  + openBalls[trn][7] then I changed 'hoop' to 'spinach' -->
 			document.getElementById("playbyplay").innerHTML +="<img style='width:1em; height:1em; vertical-align: bottom;' src='images/" + balls[trn] + "live.png' alt='" + balls[trn] +"'> " +names[trn] + " put back to <img style='width:1em; height:1em; vertical-align: middle;' src='images/" + openBalls[trn][7] + "hoop.png' alt='hoop " + openBalls[trn][7] + "'> <br />";
 		}
@@ -340,9 +345,13 @@ else if ([trn]!=htr)
 // <!-- Advanced the hitter's hoop -->
 else
 {
-	document.getElementById("nexthoop").src="images/" + openBalls[trn][hp] + "hoop.png";
-	document.getElementById("nexthoop").value='hoop' + openBalls[trn][7]; 
-	document.getElementById("nexthoop").title='hoop' + openBalls[trn][7]
+	document.getElementById("hoopsvg").innerHTML= openBalls[trn][7];
+	if (openBalls[trn][7]>9) {
+		document.getElementById("hoopsvg").style.textIndent = "-20px";
+	}
+	// document.getElementById("nexthoop").src="images/" + openBalls[trn][hp] + "hoop.png";
+	// document.getElementById("nexthoop").value='hoop' + openBalls[trn][7]; 
+	// document.getElementById("nexthoop").title='hoop' + openBalls[trn][7];
 	document.getElementById("playbyplay").innerHTML +="<img style='width:1em; height:1em; vertical-align: bottom;' src='images/" + balls[trn] + "live.png' alt='" + balls[trn] +"'> " +names[trn] + " clears <img style='width:1em; height:1em; vertical-align: middle;' src='images/" + hoopPassed + "hoop.png' alt='hoop " + hoopPassed + "'> <br />";
 	for (var j = 0; j < names.length; j++) {
 		if (openBalls[trn][j]=="dead")
@@ -646,6 +655,20 @@ text.text0 {
 	display: none;
 }
 
+#hoopsvg {
+
+    border-radius: 25px 25px 0px 0px;
+    border: 15px solid SaddleBrown;
+    border-bottom-style: none;
+    padding: 20px;
+    width: 10px;
+    height: 70px;
+    color: SaddleBrown;
+    font-size: 300%;
+    font-weight: 900;
+    text-indent: -5px;
+    text-align: center;
+}
 /*	#pos4 {
 padding-left: 55px;
 }
@@ -721,14 +744,15 @@ padding-right: 55px;
 				</div>
 
 				<div class="flex-container" align="center">
-					<input type="image" src="images/1hoop.png" id="nexthoop" value="Hoop 1" onclick="clearHoop(trn,openBalls[trn][7]);" />
+					<p role="button" tabindex="0" id="hoopsvg" onclick="clearHoop(trn,openBalls[trn][7])""></p>
+			<!-- 		<input type="image" src="images/1hoop.png" id="nexthoop" value="Hoop 1" onclick="clearHoop(trn,openBalls[trn][7]);" /> -->
 					
 				</div>
 				<div class="flex-container">
 
 					<div id="pos0" class="flex-item">
 						<svg>
-							<circle id="circle0" class="flex-item circle0" cx="40" cy="40" r="34" onclick="hitBall(trn,0)" />
+							<circle role="button" tabindex="0" id="circle0" class="flex-item circle0" cx="40" cy="40" r="34" onclick="hitBall(trn,0)" />
 							<text id="text0" class="text0" x="14%" y="60%" alignment-baseline="middle" text-anchor="middle" fill="blue">Albus Dumbledore</text>
 						</svg>
 					</div>
