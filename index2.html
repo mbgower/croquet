@@ -269,7 +269,7 @@ function setupBalls(trn) {
 
 			circlex.style.fill= balls[j];
 			circlex.style.stroke= balls[j];
-			document.getElementById([titx]).textContent = balls[j] + " new svgtext live";
+			document.getElementById([titx]).textContent = balls[j] + " live";
 
 			document.getElementById("pos" + [j]).style.display="inline";
 			document.getElementById("text" + [j]).innerHTML= names[j]	;				
@@ -291,7 +291,7 @@ function setupBalls(trn) {
 			document.getElementById("pos" + [j]).style.display="inline";					
 			circlex.style.fill= "white";
 			circlex.style.stroke= balls[j];
-			document.getElementById([titx]).textContent = balls[j] + " new svgtext dead";
+			document.getElementById([titx]).textContent = balls[j] + " dead";
 			<!-- document.getElementById("ball" + [j]).disabled=true; -->
 			document.getElementById("ball" + [j]).src="images/" + balls[j]  + "dead.png";
 			document.getElementById("ball" + [j]).value= balls[j] + " ball dead";
@@ -367,7 +367,7 @@ else
 			document.getElementById("ball" + [j]).disabled=false;
 			var circlex = document.getElementById("circle" + [j] );
 			var titx = "title" + [j];
-			document.getElementById([titx]).textContent = balls[j] + " new svgtext live";
+			document.getElementById([titx]).textContent = balls[j] + " live";
 			var circlestate = circlex.style.fill.value;
 			// 2017 shouldn't this be circlestate, otherwise, what is point of prior line
 			circlex.style.fill= balls[j];				
@@ -406,8 +406,8 @@ function hitBall(htr,ht) {
 			var circlex = document.getElementById("circle" + [ht] );
 			// var titx = document.getElementById("title" + [ht]);
 			var titx = "title" + [ht];
-			document.getElementById([titx]).textContent = balls[ht] + " new svgtext live";
-			// titx.textContent = balls[ht] + "new svgtext hit live";		
+			document.getElementById([titx]).textContent = balls[ht] + " live";
+			// titx.textContent = balls[ht] + "hit live";		
 			// 2017 where is circlestate used?
 			var circlestate = circlex.style.fill.value;
 			circlex.style.fill= balls[ht];
@@ -428,7 +428,7 @@ function hitBall(htr,ht) {
 		document.getElementById("ball" + [ht]).style.color="white";
 		var circlex = document.getElementById("circle" + [ht] );
 		var titx = "title" + [ht];
-		document.getElementById([titx]).textContent = balls[ht] + " new svgtext dead";
+		document.getElementById([titx]).textContent = balls[ht] + " dead";
 		circlex.style.fill="white";
 
 	}
@@ -754,58 +754,69 @@ padding-right: 55px;
 				</div>
 
 				<div class="flex-container" align="center">
-					<a href="#" role="button" tabindex="0" id="hoopsvg" onclick="clearHoop(trn,openBalls[trn][7])""></a>
+					<a href="#" role="button" id="hoopsvg" title="hoop" onclick="clearHoop(trn,openBalls[trn][7]);"></a>
 			<!-- 		<input type="image" src="images/1hoop.png" id="nexthoop" value="Hoop 1" onclick="clearHoop(trn,openBalls[trn][7]);" /> -->
 					
 				</div>
 				<div class="flex-container">
 
-					<div id="pos0" class="flex-item">
-						<svg>
-							<circle role="button" id="circle0" class="flex-item circle0" cx="40" cy="40" r="34" onclick="hitBall(trn,0)" />
-							<title id="title0">title0</title><a xlink:href="#">
-								<text id="text0" class="text0" x="14%" y="60%" alignment-baseline="middle" text-anchor="middle" fill="blue" onclick="hitBall(trn,0)" aria-describedby="circle0">Albus Dumbledore</text>
+					<div id="pos0" class="flex-item" >
+						<svg aria-labelledby="title0" role="img">
+							<circle role="button" id="circle0" class="flex-item circle0" cx="40" cy="40" r="34" onclick="hitBall(trn,0);" />
+							<title id="title0">title0</title>
+							<a xlink:href="#" onclick="hitBall(trn,0);" >
+								<text id="text0" class="text0" x="14%" y="60%" alignment-baseline="middle" text-anchor="middle" fill="blue">Albus Dumbledore</text>
 							</a>
 						</svg>
 					</div>
 
 					<div id="pos1" class="flex-item">
-						<svg>
-							<circle id="circle1" class="flex-item circle1" cx="40" cy="40" r="34" onclick="hitBall(trn,1)" />
+						<svg aria-labelledby="title1" role="img">
+							<circle role="button" id="circle1" class="flex-item circle1" cx="40" cy="40" r="34" onclick="hitBall(trn,1);" />
 							<title id="title1">title1</title>
-							<text id="text1" class="text1" x="14%" y="60%" alignment-baseline="middle" text-anchor="middle" fill="red">Albus Dumbledore</text>
+							<a xlink:href="#" onclick="hitBall(trn,1);" >
+									<text id="text1" class="text1" x="14%" y="60%" alignment-baseline="middle" text-anchor="middle" fill="red">Albus Dumbledore</text>
+							</a>
 						</svg>
 					</div>
 
 					<div id="pos2" class="flex-item">
-						<svg>
-							<circle id="circle2" class="flex-item circle2" cx="40" cy="40" r="34" onclick="hitBall(trn,2)" />
+						<svg aria-labelledby="title2" role="img">
+							<circle id="circle2" class="flex-item circle2" cx="40" cy="40" r="34" onclick="hitBall(trn,2);" />
 							<title id="title2">title2</title>
-							<text id="text2" class="text2" x="14%" y="60%" alignment-baseline="middle" text-anchor="middle" fill="black">Albus Dumbledore</text>
+							<a xlink:href="#" onclick="hitBall(trn,2);" >
+								<text id="text2" class="text2" x="14%" y="60%" alignment-baseline="middle" text-anchor="middle" fill="black">Albus Dumbledore</text>
+							</a>
 						</svg>
 					</div>
 
 					<div id="pos3" class="flex-item">
-						<svg>
-							<circle id="circle3" class="flex-item circle3" cx="40" cy="40" r="34" onclick="hitBall(trn,3)" />
+						<svg aria-labelledby="title3" role="img">
+							<circle role="button" id="circle3" class="flex-item circle3" cx="40" cy="40" r="34" onclick="hitBall(trn,3);" />
 							<title id="title3">title3</title>
-							<text id="text3" class="text3" x="14%" y="60%" alignment-baseline="middle" text-anchor="middle" fill="yellow">Albus Dumbledore</text>
+							<a xlink:href="#" onclick="hitBall(trn,3);" >
+								<text id="text3" class="text3" x="14%" y="60%" alignment-baseline="middle" text-anchor="middle" fill="yellow">Albus Dumbledore</text>
+							</a>
 						</svg>
 					</div>
 
 					<div id="pos4" class="flex-item">
-						<svg>
-							<circle id="circle4" class="flex-item circle4" cx="40" cy="40" r="34" onclick="hitBall(trn,4)" />
+						<svg aria-labelledby="title4" role="img">
+							<circle role="button" id="circle4" class="flex-item circle4" cx="40" cy="40" r="34" onclick="hitBall(trn,4);" />
 							<title id="title4">title4</title>
-							<text id="text4" class="text4" x="14%" y="60%" alignment-baseline="middle" text-anchor="middle" fill="green">Albus Dumbledore</text>
+							<a xlink:href="#" onclick="hitBall(trn,4);" >
+								<text id="text4" class="text4" x="14%" y="60%" alignment-baseline="middle" text-anchor="middle" fill="green">Albus Dumbledore</text>
+							</a>
 						</svg>
 					</div>
 
 					<div id="pos5" class="flex-item">
-						<svg>
-							<circle id="circle5" class="flex-item circle5" cx="40" cy="40" r="34" onclick="hitBall(trn,5)" />
+						<svg aria-labelledby="title5" role="img">
+							<circle role="button" id="circle5" class="flex-item circle5" cx="40" cy="40" r="34" onclick="hitBall(trn,5);" />
 							<title id="title5">title5</title>
-							<text id="text5" class="text5" x="14%" y="60%" alignment-baseline="middle" text-anchor="middle" fill="orange">Albus Dumbledore</text>
+							<a xlink:href="#" onclick="hitBall(trn,5);" >
+								<text id="text5" class="text5" x="14%" y="60%" alignment-baseline="middle" text-anchor="middle" fill="orange">Albus Dumbledore</text>
+							</a>
 						</svg>
 					</div>
 				</div>
