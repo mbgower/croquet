@@ -749,7 +749,7 @@ padding-right: 55px;
 
 			</div>
 
-			<div id="newshooting" class="flex-group">
+			<div id="newshooting" class="flex-group" role="region" aria-live="polite">
 				<div class="flex-container" id="current">
 				</div>
 
@@ -758,12 +758,12 @@ padding-right: 55px;
 			<!-- 		<input type="image" src="images/1hoop.png" id="nexthoop" value="Hoop 1" onclick="clearHoop(trn,openBalls[trn][7]);" /> -->
 					
 				</div>
-				<div class="flex-container">
+				<div class="flex-container" 	>
 
 					<div id="pos0" class="flex-item" >
 						<svg aria-labelledby="title0">
 							<title id="title0">title0</title>
-							<circle role="button" id="circle0" class="flex-item circle0" cx="40" cy="40" r="34" onclick="hitBall(trn,0);" />
+							<circle role="button" id="circle0" class="flex-item circle0" cx="40" cy="40" r="34" aria-labelledby="title0" onclick="hitBall(trn,0);" />
 							<a xlink:href="#" onclick="hitBall(trn,0);" >
 								<text id="text0" class="text0" x="14%" y="60%" alignment-baseline="middle" text-anchor="middle" fill="blue">Albus Dumbledore</text>
 							</a>
