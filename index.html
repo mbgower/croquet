@@ -119,6 +119,7 @@ document.getElementById("newshooting").style.display="flex";
 document.getElementById("secondary").style.display="none";
 document.body.style.backgroundImage="none";
 document.getElementById("summary").style.display="inline";
+document.getElementById("playbyplay").style.display="none";
 document.getElementById("bounds").style.display="inline";
 document.getElementById("bounds").disabled=false;
 document.getElementById("bounds").style.color="Black";
@@ -210,7 +211,8 @@ document.getElementById("newshooting").style.display="flex";
 <!-- alter controls -->
 document.getElementById("summary").style.display="inline";
 document.getElementById("controls").style.display="inline";
-document.getElementById("playbyplay").style.display="inline";
+document.getElementById("playbyplay").style.display="none";
+// document.getElementById("playbyplay").style.display="inline";
 document.getElementById("bounds").style.display="inline";
 document.getElementById("bounds").disabled=false;
 
@@ -450,6 +452,7 @@ function showStatus() {
 		document.getElementById("shooting").style.display="none";
 		document.getElementById("newshooting").style.display="none";			
 		document.getElementById("field").style.display="inline";
+		document.getElementById("playbyplay").style.display="inline";		
 		document.body.style.backgroundImage="url('images/stake.png')";			
 		<!-- alter main control -->
 		document.getElementById("summary").style.display="none";
@@ -749,7 +752,7 @@ padding-right: 55px;
 
 			</div>
 
-			<div id="newshooting" class="flex-group">
+			<div id="newshooting" class="flex-group" role="region" aria-live="polite">
 				<div class="flex-container" id="current">
 				</div>
 
@@ -758,12 +761,12 @@ padding-right: 55px;
 			<!-- 		<input type="image" src="images/1hoop.png" id="nexthoop" value="Hoop 1" onclick="clearHoop(trn,openBalls[trn][7]);" /> -->
 					
 				</div>
-				<div class="flex-container">
+				<div class="flex-container" 	>
 
 					<div id="pos0" class="flex-item" >
 						<svg aria-labelledby="title0">
 							<title id="title0">title0</title>
-							<circle role="button" id="circle0" class="flex-item circle0" cx="40" cy="40" r="34" onclick="hitBall(trn,0);" />
+							<circle role="button" id="circle0" class="flex-item circle0" cx="40" cy="40" r="34" aria-labelledby="title0" onclick="hitBall(trn,0);" />
 							<a xlink:href="#" onclick="hitBall(trn,0);" >
 								<text id="text0" class="text0" x="14%" y="60%" alignment-baseline="middle" text-anchor="middle" fill="blue">Albus Dumbledore</text>
 							</a>
