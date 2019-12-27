@@ -246,7 +246,11 @@ Future
 			}
 		<!-- check to see if player is already finished -->
 		else if (openBalls[trn][7]>[totHoops])
+			{
+			 openBalls[trn][6]=="finished";
+			 window.alert("Got to nextTurn finished");
 			nextTurn()
+	}
 		else
 			{
 		<!-- Set up action  menu for player -->
@@ -273,6 +277,7 @@ Future
 			<!-- Get the balls displayed with appropriate status -->
 			setupBalls([trn])
 			<!-- Update the next player ball colour -->
+			
 			if (trn < names.length-1) {
 			document.getElementById("mainaction").src="images/" + balls[trn+1]  + "live.png";
 			document.getElementById("mainaction").value="Next turn, " +balls[trn+1];
@@ -345,22 +350,29 @@ Future
 			}
 	
 	function setupBalls(trn) {
-				for (var j = 0; j < names.length; j++) {
-				if (openBalls[trn][j]=="live")
+				for (var j = 0; j < names.length; j++)
+				{
+					if (openBalls[trn][j]=="finished")
 					{
+						window.alert("Got to setupBalls finished check");
+						document.getElementById("ball" + [j]).style.display="none";
+						}
+					else if (openBalls[trn][j]=="live")
+					{
+
 					document.getElementById("ball" + [j]).style.display="inline";
 					document.getElementById("ball" + [j]).disabled=false;
 					document.getElementById("ball" + [j]).src="images/" + balls[j]  + "live.png";
 					document.getElementById("ball" + [j]).value= balls[j] + " ball alive";
 					document.getElementById("ball" + [j]).alt= balls[j] + " ball alive";
 					document.getElementById("ball" + [j]).title= balls[j] + " ball alive";
-
 					}
 				else if (openBalls[trn][j]=="owns")
 					{
 					document.getElementById("ball" + [j]).style.display="none";
 					}
-				else {	
+
+				else {
 					document.getElementById("ball" + [j]).style.display="inline";
 					<!-- document.getElementById("ball" + [j]).disabled=true; -->
 					document.getElementById("ball" + [j]).src="images/" + balls[j]  + "dead.png";
@@ -402,6 +414,15 @@ Future
 			<!-- check to see if this is the last hoop -->
 			if (openBalls[htr][hp]>[totHoops])
 			{
+				// for (var i = 0; i < names.length; i++) {
+					openBalls[0][htr]="finished"
+					openBalls[1][htr]="finished"
+					openBalls[2][htr]="finished"
+					openBalls[3][htr]="finished"
+					openBalls[4][htr]="finished"
+					openBalls[5][htr]="finished"
+				// }
+					openBalls[htr][6]="finished"
 				window.alert(names[htr] + " has finished!");
 				document.getElementById("playbyplay").innerHTML +="<img style='width:1em; height:1em; vertical-align: bottom;' src='images/" + balls[trn] + "live.png' alt='" + balls[trn] +"'> " + names[htr] + " pegs out" + "<br />";
 			}
