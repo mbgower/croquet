@@ -248,7 +248,7 @@ Future
 		else if (openBalls[trn][7]>[totHoops])
 			{
 			 openBalls[trn][6]=="finished";
-			 window.alert("Got to nextTurn finished");
+			//  window.alert("Got to nextTurn finished");
 			nextTurn()
 	}
 		else
@@ -354,7 +354,7 @@ Future
 				{
 					if (openBalls[trn][j]=="finished")
 					{
-						window.alert("Got to setupBalls finished check");
+						// window.alert("Got to setupBalls finished check");
 						document.getElementById("ball" + [j]).style.display="none";
 						}
 					else if (openBalls[trn][j]=="live")
@@ -414,17 +414,13 @@ Future
 			<!-- check to see if this is the last hoop -->
 			if (openBalls[htr][hp]>[totHoops])
 			{
-				// for (var i = 0; i < names.length; i++) {
-					openBalls[0][htr]="finished"
-					openBalls[1][htr]="finished"
-					openBalls[2][htr]="finished"
-					openBalls[3][htr]="finished"
-					openBalls[4][htr]="finished"
-					openBalls[5][htr]="finished"
-				// }
+				for (var i = 0; i < names.length; i++) {
+					openBalls[i][htr]="finished"
+				}
 					openBalls[htr][6]="finished"
 				window.alert(names[htr] + " has finished!");
 				document.getElementById("playbyplay").innerHTML +="<img style='width:1em; height:1em; vertical-align: bottom;' src='images/" + balls[trn] + "live.png' alt='" + balls[trn] +"'> " + names[htr] + " pegs out" + "<br />";
+				nextTurn();
 			}
 			<!-- Check if the hitter is pushing someone else's ball through the hoop -->
 			else if ([trn]!=htr) 
