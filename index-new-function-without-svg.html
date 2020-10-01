@@ -1,0 +1,738 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Croquet Tracker</title>
+<!--//  
+Fully functional
+- added hoop images and synched with code
+- added peg image to name entry; name entry not tied in with code; background image scrolling
+- fits in iphone window
+- balls displayed in summary/field view
+5.1 resolved
+- primary focus: breakout actions div
+- player ball no longer centered
+- out of bounds needs confirmation message at start
+6.0 resolved
+- setup using edit fields
+6.2 resolved
+- ability to put another person's ball through the hoop
+7.1
+- remove all remmed lines
+- added ability undo a command for ball and hoop
+7.2
+experimenting with spacing to adjust to iphone 4
+7.3
+- adding some better ALT text to images
+7.4
+- picked up strange presentation in iphone 5 from 7.2 in 7.3. Resolved to get better alt
+7.5
+- tied ALT to top ball
+- added focus handling to main screen
+- removed pseudo arrow on setup page
+7.6: experiments with cleaning up action buttons
+- removed pink background on other actions button
+- added in images and titles for the buttons
+7.7
+- improved the icons for actions
+- put a drop-down menu on the player button (added aria-haspopup)
+- added Title to buttons to improve usability for non-touch
+- discovered that title, alt and value must be exactly the same for different screenreaders to only read once and read properly when using an image on an input
+- changed "live" to "alive" for alt/title/value so that screenreader pronounces properly
+7.8
+- false start
+7.9
+- reduced menu options to context (e.g, if only 3 players playing, only show those balls -- and only the balls other than active player)
+Bugs
+- landmarks being announced strangely in iOS
+- after exposing menu, lose formatting on action menu
+- need to put action menu in a table or otherwise position
+- need to make menu look better - maybe an overlay? - and also make menu items have proper role and operation
+Future
+- try hiding summary on separate screen to see if that resolves safari controls; otherwise research more
+- need to make "next" and "play" icons have an overlay like CD player controls
+- could offer ability to alter player names at any point
+- could offer ability to alter ball colour
+- future possibilities include: social integration (add players from FB, make a game an event and the play-by-play a posting)
+- add option to add colour commentary - user hits button and entering text about current player's turn
+	(e.g., "Gower shoots lays up with easy shot for hoop")
+8.1 Fixed bugs in hoops, which was using "8" as the value to rescind a hoop shot, resulting in player unable to get past hoop 8. Replaced with 17
+8.2 Fixed bug where player who has finished is still brought up in order; clarified hoop label at start
+//-->
+    <title></title>
+    <script>
+	
+	<!-- hitter of ball -->
+	var htr=0 
+	<!-- hit object -->
+	var ht=0
+	<!-- total hoops in game -->
+	var totHoops=16
+	<!-- holds player names -->
+    var names = [];
+	<!-- holds ball colours; not currently alterable. could offer ability in setup -->
+	<!-- I added in a pink background for the out of bounds button -->
+    var balls = ["blue","red","black","yellow","green","orange","pink"];
+
+
+<!-- This function loads player values from an input field and displays them in a textarea. -->
+<!-- It will need significant revisions to match the wireframe -->
+	function getPlayers() {
+		var str = document.getElementById("prospect");
+		names.push(str.value);
+		str.value = "";
+		str.focus();
+		var area = document.getElementById("txtArea");
+		area.value = "";
+		for (var i = 0; i < names.length; i++) {
+			if (i>=6)
+			<!-- user has just entered 7th name. can't do this, so start game -->
+				{
+				window.alert("Only 6 people can play! We're full, so let's start the game.");
+				names.pop();
+				playTurn();
+				}
+	
+			else 
+			<!-- match names array to new array with appropriate values for ball and hoop values. -->
+			<!-- this could be done more elegantly. Currently just overwrites same values -->
+			<!-- keeping it like this because it helps me visualize the array -->
+			<!-- Javascript does not support multidimensional arrays -->
+				{
+				openBalls = [["owns","live","live","live","live","live","in",1],
+				["live","owns","live","live","live","live","in",1],
+				["live","live","owns","live","live","live","in",1],
+				["live","live","live","owns","live","live","in",1],
+				["live","live","live","live","owns","live","in",1],
+				["live","live","live","live","live","owns","in",1]];
+
+				area.value += names[i] + " is playing "+ balls[i] + "." + "\n"; 		
+				}
+		}
+	}
+
+	<!-- The validation is now working. Now I need to consider 1) stripping out single and double quotes 2) adding the names to the array -->
+	function validateForm()
+		{ for (var i = 1; i < 7; i++)
+			{
+				if (i < 6) {
+					var j = i+1
+					}
+			var a = document.getElementById("player" + [i] ).value;
+			var b = document.getElementById("player" + [j] ).value;
+			if (a=="" || a==null) {
+					if ( b=="" || b==null )
+						{
+						}
+					else
+						{
+						
+						("Please populate player fields in order. You do not need to have 6 people, but you can't skip a colour. First player is " + [j] );
+						return false;
+					}
+				}
+			else {
+				<!-- I add the value to the names array -->
+				<!-- i-1 would be the name array value -->
+				names.push(a);
+				}
+			}
+				<!-- The openBalls array includes information on the balls, as well as on whether the player is inbounds, and what hoop they are shooting for -->		
+				openBalls = [["owns","live","live","live","live","live","in",1],
+				["live","owns","live","live","live","live","in",1],
+				["live","live","owns","live","live","live","in",1],
+				["live","live","live","owns","live","live","in",1],
+				["live","live","live","live","owns","live","in",1],
+				["live","live","live","live","live","owns","in",1]];
+				playTurn()
+
+				
+		}
+	<!-- Didn't write. Using to timestamp the game log -->
+	function displayTime() {
+    var str = "";
+
+    var currentTime = new Date()
+    var hours = currentTime.getHours()
+    var minutes = currentTime.getMinutes()
+    var seconds = currentTime.getSeconds()
+
+    if (minutes < 10) {
+        minutes = "0" + minutes
+    }
+    if (seconds < 10) {
+        seconds = "0" + seconds
+    }
+    str += hours + ":" + minutes + ":" + seconds + " ";
+    if(hours > 11){
+        str += "PM"
+    } else {
+        str += "AM"
+    }
+    return str;
+}
+
+	function preGame() {
+		document.getElementById("shooting").style.display="none";
+		document.getElementById("field").style.display="none";
+		document.getElementById("summary").style.display="none";
+		document.getElementById("bounds").style.display="none";
+		document.getElementById("actionmenu").style.display="none";
+		for (var j = 0; j < balls.length; j++)
+		{
+			document.getElementById("ball" + [j]).style.display="none";
+		}
+		
+		}
+
+	
+	function playTurn() {
+		trn=0 ;
+		if (names[trn]==null) {
+			window.alert("Player " + [trn] + " is not defined. Please add at least two players.");
+		}
+		else {
+			<!-- Hide the Setup and open the game view-->
+			document.getElementById("setup").style.display="none";
+			document.getElementById("shooting").style.display="inline";
+			document.getElementById("secondary").style.display="none";
+
+			document.body.style.backgroundImage="none";
+			document.getElementById("summary").style.display="inline";
+			document.getElementById("bounds").style.display="inline";
+			document.getElementById("bounds").disabled=false;
+			document.getElementById("bounds").style.color="Black";
+<!--			document.getElementById("playbyplay").style.display="none"; -->
+			<!-- Populate hoop value -->
+			var select = document.getElementById("hps");
+			totHoops= select.options[select.selectedIndex].value;
+			<!-- Populate "playbyplay" log -->
+			var starttime = displayTime();
+			document.getElementById("playbyplay").innerHTML="<h2>Game Summary</h2>";
+			document.getElementById("playbyplay").innerHTML+= [starttime] + ": ";
+			document.getElementById("playbyplay").innerHTML +="Game begins, hoops (including pegs): " + [totHoops] + "<br />";	
+			<!-- Populate the actions menu -->
+			buildActionsMenu();
+			<!-- Enable Next Player function, now that we've started -->
+			document.getElementById("mainaction").src="images/" + balls[trn+1]  + "live.png";
+			document.getElementById("mainaction").value="Next turn, " +balls[trn+1];
+			document.getElementById("mainaction").title="Next turn, " +balls[trn+1];
+			document.getElementById("mainaction").alt="Next turn, " +balls[trn+1];			
+			document.getElementById("mainaction").onclick = nextTurn;
+			<!-- Put trn value to the max so that the nextTurn function trips the else statement -->
+			trn=names.length
+			nextTurn([trn])
+			<!-- Set focus to top -->
+			document.getElementById("nexthoop").focus();
+
+		}
+	}
+
+	function nextTurn() {
+		if (trn < names.length-1) {
+			trn++ ;
+			} 
+		else {
+			trn=0 ;
+			}
+		<!-- Check to see if the player is out of bounds -->
+		if (openBalls[trn][6]=="out")
+			{
+			window.alert( names[trn] + " lost turn. Place ball back in play.");
+			openBalls[trn][6]="in"
+			var timestamp = displayTime();
+			document.getElementById("playbyplay").innerHTML += [timestamp] + ": ";
+			document.getElementById("playbyplay").innerHTML += "<img style='width:1em; height:1em; vertical-align: bottom;' src='images/" + balls[trn] + "live.png' alt='" + balls[trn] +"'> " + names[trn] + " forfeits turn. Ball is put back in play<br />";
+			nextTurn()
+			}
+		<!-- check to see if player is already finished -->
+		else if (openBalls[trn][7]>[totHoops])
+			{
+			 openBalls[trn][6]=="finished";
+			//  window.alert("Got to nextTurn finished");
+			nextTurn()
+	}
+		else
+			{
+		<!-- Set up action  menu for player -->
+			buildActionsMenu()
+		<!-- position the second line of balls correctly -->
+			if (trn > 3) {
+				document.getElementById("prime").style.display="none";
+				document.getElementById("secondary").style.display="inline";
+				}
+			else {
+				document.getElementById("prime").style.display="inline";
+				document.getElementById("secondary").style.display="none";
+				}
+			<!-- Populate new player and log values -->
+			var timestamp = displayTime();
+			document.getElementById("playbyplay").innerHTML += [timestamp] + ": ";
+			document.getElementById("current").innerHTML="<p align='center'><input type='image' src='images/" +  balls[trn] + "live.png' aria-haspopup='true' width='60' height='60' value='" + balls[trn] + "ball active' title = '" + balls[trn] + "ball active' onclick='showMenu();' alt='" + balls[trn] + " ball active'> " + "<br /><strong>" + names[trn] + " shooting</strong></p>";
+			document.getElementById("playbyplay").innerHTML +="<img style='width:1em; height:1em; vertical-align: middle;' src='images/" + balls[trn] + "live.png' alt='" + balls[trn] +"'> " +names[trn] + " is up, shooting for <img style='width:1em; height:1em; vertical-align: middle;' src='images/" + openBalls[trn][7] + "hoop.png' alt='hoop " + openBalls[trn][7] + "'><br />";
+			document.getElementById("nexthoop").src="images/" + openBalls[trn][7] + "hoop.png";
+			document.getElementById("nexthoop").value='hoop' + openBalls[trn][7];
+<!-- do I need to put in an ALT and TITLE, or is the value considered acceptable? -->			
+			document.getElementById("nexthoop").setAttribute('aria-describedby','current');
+			document.getElementById("status").innerHTML = ""
+			<!-- Get the balls displayed with appropriate status -->
+			setupBalls([trn])
+			<!-- Update the next player ball colour -->
+			
+			if (trn < names.length-1) {
+			document.getElementById("mainaction").src="images/" + balls[trn+1]  + "live.png";
+			document.getElementById("mainaction").value="Next turn, " +balls[trn+1];
+			document.getElementById("mainaction").title="Next turn, " +balls[trn+1];
+			document.getElementById("mainaction").alt="Next turn, " +balls[trn+1];	
+			} 
+		else {
+			document.getElementById("mainaction").src="images/" + balls[0]  + "live.png";
+			document.getElementById("mainaction").value="Next turn, " +balls[0];			
+			document.getElementById("mainaction").title="Next turn, " +balls[0];
+			document.getElementById("mainaction").alt="Next turn, " +balls[0];
+			}
+			
+			<!-- Set focus on hoop -->
+			document.getElementById("nexthoop").focus();
+			}
+	}
+	function showShooting(){
+			<!-- document.getElementById("current").style.display="inline";	 -->
+			document.getElementById("shooting").style.display="inline";
+			<!-- alter controls -->
+			document.getElementById("summary").style.display="inline";
+			document.getElementById("controls").style.display="inline";
+			document.getElementById("playbyplay").style.display="inline";
+			document.getElementById("bounds").style.display="inline";
+			document.getElementById("bounds").disabled=false;
+			
+			document.getElementById("bounds").style.color="Black";
+			if (trn < names.length-1) {
+			document.getElementById("mainaction").src="images/" + balls[trn+1]  + "live.png";
+			document.getElementById("mainaction").value="Next turn, " +balls[trn+1];
+			document.getElementById("mainaction").alt="Next turn, " +balls[trn+1];
+			document.getElementById("mainaction").title="Next turn, " +balls[trn+1];
+			} 
+			else {
+			document.getElementById("mainaction").src="images/" + balls[0]  + "live.png";
+			document.getElementById("mainaction").value="Next turn, " +balls[0];
+			document.getElementById("mainaction").alt="Next turn, " +balls[0];
+			document.getElementById("mainaction").title="Next turn, " +balls[0];
+			}
+			document.getElementById("mainaction").onclick = nextTurn;
+			<!-- turn off other regions -->
+			document.getElementById("field").style.display="none";
+			
+			<!-- Update display -->
+			document.getElementById("setup").style.display="none";
+			document.getElementById("secondary").style.display="none";
+			document.body.style.backgroundImage="none";
+			<!-- Set focus on hoop -->
+			document.getElementById("nexthoop").focus();
+
+			}
+	
+	function showMenu(){
+			<!-- alter view -->
+			document.getElementById("shooting").style.display="none";
+			document.getElementById("field").style.display="none";
+			document.getElementById("controls").style.display="none";
+			document.getElementById("playbyplay").style.display="none";
+			document.getElementById("actionmenu").style.display="inline";
+			<!-- alter main control -->
+			document.getElementById("summary").style.display="none";
+			document.getElementById("bounds").style.display="none";
+		
+			}
+			
+	function hideMenu() {
+			document.getElementById("actionmenu").style.display="none";
+			showShooting();
+			}
+	
+	function setupBalls(trn) {
+				for (var j = 0; j < names.length; j++)
+				{
+					if (openBalls[trn][j]=="finished")
+					{
+						// window.alert("Got to setupBalls finished check");
+						document.getElementById("ball" + [j]).style.display="none";
+						}
+					else if (openBalls[trn][j]=="live")
+					{
+
+					document.getElementById("ball" + [j]).style.display="inline";
+					document.getElementById("ball" + [j]).disabled=false;
+					document.getElementById("ball" + [j]).src="images/" + balls[j]  + "live.png";
+					document.getElementById("ball" + [j]).value= balls[j] + " ball alive";
+					document.getElementById("ball" + [j]).alt= balls[j] + " ball alive";
+					document.getElementById("ball" + [j]).title= balls[j] + " ball alive";
+					}
+				else if (openBalls[trn][j]=="owns")
+					{
+					document.getElementById("ball" + [j]).style.display="none";
+					}
+
+				else {
+					document.getElementById("ball" + [j]).style.display="inline";
+					<!-- document.getElementById("ball" + [j]).disabled=true; -->
+					document.getElementById("ball" + [j]).src="images/" + balls[j]  + "dead.png";
+					document.getElementById("ball" + [j]).value= balls[j] + " ball dead";
+					document.getElementById("ball" + [j]).alt= balls[j] + " ball dead";
+					document.getElementById("ball" + [j]).title= balls[j] + " ball dead";
+					}
+
+				}
+	}
+	<!-- Takes hitter htr and hoop hp values from openBalls values based on who and what is active when the respective buttons are clicked -->
+	function clearHoop(htr,hp) {
+	
+		if (hp==17)
+		<!-- Manually Cancel hoop via menu -->
+		{
+			if (openBalls[trn][7]==1)
+			{
+			window.alert("Player is shooting for the first hoop");
+			}
+			else
+			{
+			openBalls[trn][7]=openBalls[trn][7]-1
+			document.getElementById("nexthoop").src="images/" + openBalls[trn][7] + "hoop.png";
+			document.getElementById("nexthoop").value="hoop" + openBalls[trn][7];
+			document.getElementById("nexthoop").title="hoop" + openBalls[trn][7];
+			<!--mg this will break? add:  + openBalls[trn][7] then I changed 'hoop' to 'spinach' -->
+			document.getElementById("playbyplay").innerHTML +="<img style='width:1em; height:1em; vertical-align: bottom;' src='images/" + balls[trn] + "live.png' alt='" + balls[trn] +"'> " +names[trn] + " put back to <img style='width:1em; height:1em; vertical-align: middle;' src='images/" + openBalls[trn][7] + "hoop.png' alt='hoop " + openBalls[trn][7] + "'> <br />";
+			}
+		}
+		else
+		{
+			var hp = 7
+			var hoopPassed = openBalls[htr][hp];
+			openBalls[htr][hp]=openBalls[htr][hp]+1
+			var timestamp = displayTime();
+			document.getElementById("playbyplay").innerHTML += [timestamp] + ": ";
+			
+			<!-- check to see if this is the last hoop -->
+			if (openBalls[htr][hp]>[totHoops])
+			{
+				for (var i = 0; i < names.length; i++) {
+					openBalls[i][htr]="finished"
+				}
+					openBalls[htr][6]="finished"
+				window.alert(names[htr] + " has finished!");
+				document.getElementById("playbyplay").innerHTML +="<img style='width:1em; height:1em; vertical-align: bottom;' src='images/" + balls[trn] + "live.png' alt='" + balls[trn] +"'> " + names[htr] + " pegs out" + "<br />";
+				nextTurn();
+			}
+			<!-- Check if the hitter is pushing someone else's ball through the hoop -->
+			else if ([trn]!=htr) 
+			{
+				window.alert(names[trn] + " pushed player through; " + names[htr] + " will be shooting for " + openBalls[htr][hp]);
+				document.getElementById("playbyplay").innerHTML +="<img style='width:1em; height:1em; vertical-align: bottom;' src='images/" + balls[trn] + "live.png' alt='" + balls[trn] +"'> " +names[trn] + " pushed " + names[htr] + " through <img style='width:1em; height:1em; vertical-align: middle;' src='images/" + hoopPassed + "hoop.png' alt='hoop " + hoopPassed + "'> <br />";
+				
+			}
+			<!-- Advanced the hitter's hoop -->
+			else
+			{
+		 document.getElementById("nexthoop").src="images/" + openBalls[trn][hp] + "hoop.png";
+		 document.getElementById("nexthoop").value='hoop' + openBalls[trn][7]; 
+		 document.getElementById("nexthoop").title='hoop' + openBalls[trn][7]
+		 document.getElementById("playbyplay").innerHTML +="<img style='width:1em; height:1em; vertical-align: bottom;' src='images/" + balls[trn] + "live.png' alt='" + balls[trn] +"'> " +names[trn] + " clears <img style='width:1em; height:1em; vertical-align: middle;' src='images/" + hoopPassed + "hoop.png' alt='hoop " + hoopPassed + "'> <br />";
+		 for (var j = 0; j < names.length; j++) {
+				if (openBalls[trn][j]=="dead")
+				{
+				openBalls[trn][j]="live";
+				<!-- This next line assigns colour based on balls variable name -->
+				document.getElementById("ball" + [j]).src="images/" + balls[j]  + "live.png";
+<!--				document.getElementByID("ball" + [j]).value=balls[j]  + "live"; -->
+				document.getElementById("ball" + [j]).style.color="White";
+				document.getElementById("ball" + [j]).disabled=false;
+				}
+
+
+		  }	
+		}
+	   }
+	}
+
+
+	<!-- I do not have the ability to unhit a ball in this version, since I am disabling the buttons. a feature worth having, I think. -->
+	function hitBall(htr,ht) {
+
+		var timestamp = displayTime();
+		if ([ht]==6)
+			{
+			document.getElementById("playbyplay").innerHTML += [timestamp] + ": <img style='width:1em; height:1em; vertical-align: bottom;' src='images/" + balls[trn] + "live.png' alt='" + balls[trn] +"'> " + names[trn] + " goes out of bounds <br \>";
+		<!-- 	document.getElementById("playbyplay").innerHTML += names[trn] +" goes out of bounds" + "<br />"; -->
+			openBalls[htr][ht]="out";
+			window.alert( names[trn] + " loses next turn. Proceed to next player.");
+			}
+		else if (openBalls[htr][ht]=="dead")
+		<!-- manually put ball back to live -->
+			{
+			var r=window.confirm("Do you want to set the ball active again?");
+			if (r==true)
+				{
+				openBalls[htr][ht]="live";
+				document.getElementById("playbyplay").innerHTML += [timestamp] + ": " + names[ht] + " <img style='width:1em; height:1em; vertical-align: bottom;' src='images/" + balls[ht] + "live.png' alt='" + balls[ht] + "'> reset to live for <img style='width:1em; height:1em; vertical-align: bottom;' src='images/" + balls[trn] + "live.png' alt='" + balls[trn] +"'> "+ names[trn] + "<br \>";
+				document.getElementById("ball" + [ht]).src="images/" + balls[ht]  + "live.png";
+				document.getElementById("ball" + [ht]).title= balls[ht] + " ball alive";
+				document.getElementById("ball" + [ht]).value= balls[ht] + " ball alive";
+				document.getElementById("ball" + [ht]).alt= balls[ht] + " ball alive";
+				}
+			else
+				{
+				}
+			}
+
+		
+		else
+			{
+			document.getElementById("playbyplay").innerHTML += [timestamp] + ": <img style='width:1em; height:1em; vertical-align: bottom;' src='images/" + balls[trn] + "live.png' alt='" + balls[trn] +"'> " +names[trn] + " hits " + names[ht] + " <img style='width:1em; height:1em; vertical-align: bottom;' src='images/" + balls[ht] + "live.png' alt='" + balls[ht] + "'><br \>";	
+			<!-- document.getElementById("playbyplay").innerHTML += "hit" + "<br />"; -->
+			openBalls[htr][ht]="dead";
+			<!-- document.getElementById("ball" + [ht]).disabled=true; -->
+			document.getElementById("ball" + [ht]).src="images/" + balls[ht]  + "dead.png";
+			document.getElementById("ball" + [ht]).value= balls[ht] + " ball dead";
+			document.getElementById("ball" + [ht]).title= balls[ht] + " ball dead";
+			document.getElementById("ball" + [ht]).alt= balls[ht] + " ball dead";
+			document.getElementById("ball" + [ht]).style.color="white";
+			}
+
+	}
+
+
+		<!-- Show summary was an added in function. It can be cleaner in the final, since it will be a separate, visual page. -->
+	<!-- Need to make sure I handle the adjustments to the ALT text for all the ball and hoop values and states -->
+	function showStatus() {
+	
+		if (names[1]==null) 
+			{
+			window.alert("Let's get at least a couple of people playing before we worry about status!");
+			}
+		else 
+			{
+			<!-- alter view -->
+			document.getElementById("shooting").style.display="none";
+			document.getElementById("field").style.display="inline";
+			document.body.style.backgroundImage="url('images/stake.png')";			
+			<!-- alter main control -->
+			document.getElementById("summary").style.display="none";
+			document.getElementById("bounds").style.display="none";
+			document.getElementById("mainaction").src="images/" + balls[trn]  + "live.png";
+			document.getElementById("mainaction").value="Show shooting, " +balls[trn] + " playing";
+			document.getElementById("mainaction").title="Show shooting, " +balls[trn] + " playing";
+			document.getElementById("mainaction").alt="Show shooting, " +balls[trn] + " playing";			
+			document.getElementById("mainaction").onclick = showShooting;
+<!-- 			document.getElementById("status").innerHTML = "<h2>Status:</h2>"; -->
+			document.getElementById("status0").innerHTML = ""
+			document.getElementById("status1").innerHTML = ""
+			document.getElementById("status2").innerHTML = ""
+			document.getElementById("status3").innerHTML = ""
+			document.getElementById("status4").innerHTML = ""
+			document.getElementById("status5").innerHTML = ""
+			for (var i = 0; i < names.length; i++) {
+				var liveballs = ". Live balls: ";
+				var IsLiveBall = false;
+				document.getElementById("status" + [i]).innerHTML += " <img src='images/" + balls[i]  + "stake.png' alt='" + balls[i] +" player'> ";				
+				document.getElementById("status" + [i]).innerHTML += " <img src='images/" + openBalls[i][7]  + "hoop.png' height='36' alt='shooting for hoop " + openBalls[i][7] + "'> ";
+
+		 		for (var j = 0; j < names.length; j++) {
+
+					if (openBalls[i][j]=="live")
+					{
+						     document.getElementById("status" + [i]).innerHTML += " <img src='images/" + balls[j]  + "live.png' width='40' height='40' alt='" + balls[j] +" alive'> ";
+						if (IsLiveBall===false)
+							{
+							var liveballs = [liveballs] + balls[j];
+							}
+						else
+							{
+							var liveballs = [liveballs] + ", " + balls[j];
+							}
+						IsLiveBall = true;
+
+					}
+					else if (openBalls[i][j]=="owns")
+						{
+						}
+					else
+						{
+						document.getElementById("status" + [i]).innerHTML += " <img src='images/" + balls[j]  + "dead.png' width='40' height='40' alt='" + balls[j] +" dead'> ";
+
+						}
+				}
+
+				if (IsLiveBall === true)
+					{
+					
+					}
+				else
+					{
+
+					}
+				}
+			}
+	}
+	
+	function buildActionsMenu() {
+					document.getElementById("actionmenu").innerHTML="";
+					document.getElementById("actionmenu").innerHTML+="<ul><li><a href=# onclick='hitBall(trn,6);hideMenu()' />Shooter out of bounds</a></li>";
+					<!-- now populate the menu choices for this player -->
+					for (var j = 0; j < names.length; j++) {
+					if (openBalls[trn][j]!="owns") {
+						document.getElementById("actionmenu").innerHTML+="<ul><li><a href=# onclick='clearHoop(" + [j] + ",openBalls[trn][7]);hideMenu()' /> Shooter puts " + balls[j] + " through hoop</a></li>";
+							}
+					}
+					document.getElementById("actionmenu").innerHTML+="<ul><li><a href=# onclick='clearHoop(0,17);hideMenu()' />Shooter's last cleared hoop rescinded</a></li>";
+					document.getElementById("actionmenu").innerHTML+="<ul><li><a href=# onclick='hideMenu()' />Return to prior screen</a></li>";
+			}
+    </script>
+	<style>
+
+		body {
+			background-image: url(images/stake.png);
+			background-position: 475px 80px;
+			background-repeat: no-repeat;	
+			background-attachment: fixed;
+			max-width: 320px;
+			margin: 0 auto;
+			}
+
+
+		.page {
+			max-width: 320px;
+			}
+			
+.menu {
+    width: 100%;
+    background-color: #white; }
+	
+.menu ul{
+    margin: 0; padding: 0;
+    float: left;}
+ 
+.menu ul li{
+    display: block;}
+ 
+.menu ul li a{
+    float: left; text-decoration: none;
+    color: black;
+    padding: 10.5px 11px;
+    background-color: #white; }
+ 
+.menu ul li a:visited{
+    color: black;}
+ 
+.menu ul li a:hover, .menu ul li .current{
+    color: #black;
+    background-color:#white;}
+
+.menu {
+	font-size: 120%;
+	}
+	
+h1,h2 {
+    font-family: kailasa;
+  }
+	
+	</style>
+
+	<!-- Forcing mobile devices to use my display properties -->
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<title>Croquet Tracker</title>
+
+</head>
+<body onload="preGame()">
+<div role="main">
+<div id="setup">
+	<h1>Croquet Tracker</h1>
+	<form name="myForm">
+		<img class="band" src="images/bluestake.png" alt=""><label for="player1">Blue:</label><input type="text" placeholder="Player 1" name="Player 1" id="player1"><br>
+		<img class="band" src="images/redstake.png" alt=""><label for="player2">Red:</label><input type="text" placeholder="Player 2" name="Player 2" id="player2"><br>
+		<img class="band" src="images/blackstake.png" alt=""><label for="player3">Black:</label><input type="text" placeholder="Player 3" name="Player 3" id="player3"><br>
+		<img class="band" src="images/yellowstake.png" alt=""><label for="player4">Yellow:</label><input type="text" placeholder="Player 4" name="Player 4" id="player4"><br>
+		<img class="band" src="images/greenstake.png" alt=""><label for="player5">Green:</label><input type="text" placeholder="Player 5" name="Player 5" id="player5"><br>
+		<img class="band" src="images/orangestake.png" alt=""><label for="player6">Orange</label><input type="text" placeholder="Player 6" name="Player 6" id="player6"><p>
+
+	<label for "hps">Hoops (including pegs):</label>
+	
+	<select name="hps" id="hps">
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+		<option value="13">13</option>
+		<option value="14">14</option>
+		<option value="15">15</option>
+		<option value="16" Selected>16</option>
+
+	</select>
+		</form>
+	
+	</div>
+
+<div id="shooting">
+
+		<div id="current">
+		</div>
+	<!-- I believe I can just lift the colour values out of the array, and form this whole thing that way; I'm not sure the balls are even used here... Isn't it now done in setupBalls?  -->
+        <div align="center"><input type="image" src="images/1hoop.png" id="nexthoop" value="Hoop 1" onclick="clearHoop(trn,openBalls[trn][7]);" /></div>
+ <br>
+		<input type="image" src="images/bluelive.png" id="ball0" style="color:white" title="Blue Ball" alt="Blue ball" value="Blue ball" onclick="hitBall(trn,0);" />
+		<input type="image" src="images/redlive.png" id="ball1" style="color:white" title= "Red ball" alt="Red ball" value="Red ball" onclick="hitBall(trn,1);" />
+        <input type="image" src="images/blacklive.png" id="ball2" style="color:white" value="Black ball" onclick="hitBall(trn,2);" />
+		<!-- secondary location for the second line -->
+		<img src="shim.png" alt="" height="1" width="50" id="secondary" border="0"> 
+        <input type="image" src="images/yellowlive.png" id="ball3" style="color:white" value="Yellow ball" onclick="hitBall(trn,3);" />
+		<!-- prime location for the second line -->
+		<img src="shim.png" alt="" height="1" width="50" id="prime" border="0"> 
+        <input type="image" src="images/greenlive.png" id="ball4" style="color:white" value="Green ball" onclick="hitBall(trn,4);" />
+        <input type="image" src="images/orangelive.png" id="ball5" style="color:white" value="Orange ball" onclick="hitBall(trn,5);" />
+
+	<p />
+
+</div>
+<p>
+<div id="field">
+	<h2>Field</h2>
+	<p id="status"></p>
+	<p id="status0"></p>
+	<p id="status1"></p>
+	<p id="status2"></p>
+	<p id="status3"></p>
+	<p id="status4"></p>
+	<p id="status5"></p>	
+
+
+</div>
+<div id="controls" align="center" role="navigation" aria-label="actions">
+	<table role="presentation">
+	<tr>
+	<td>
+		<input type="image" id="summary" src="images/stats.png" width="60" height="60" Value="Show field" TITLE="Show field" ALT="Show field" onclick="showStatus();" />
+	</td>
+	<td>
+		<input type="image" id="bounds" src="images/shim.png" width="60" height="60" TITLE="" ALT="" onclick="showMenu();" />
+	</td>
+	<td>
+		<input type="image" id="mainaction" src="images/bluelive.png" width="60" height="60" Value="Start play" TITLE="Start play" ALT="Start play" onclick="validateForm();" />
+	</td>
+	</tr>
+	</table>
+
+</div>
+<div id="actionmenu" class="menu">
+</div>
+</div>
+<div role="complementary">
+<br>
+<p id="playbyplay"</p>	
+	<!-- menu fiddling -->
+</div>
+</body>
+</html>
