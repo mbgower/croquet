@@ -264,6 +264,7 @@ function setupBalls(trn) {
 
 			circlex.style.fill= balls[j];
 			circlex.style.stroke= balls[j];
+			document.getElementById("text" + [j]).style.fill= balls[j];
 			document.getElementById([titx]).textContent = balls[j] + " live";
 
 			document.getElementById("pos" + [j]).style.display="inline";
@@ -838,7 +839,7 @@ padding-right: 55px;
 							<circle role="button" id="circle1" class="flex-item circle1" cx="40" cy="40" r="34" onclick="hitBall(trn,1);" />
 							<title id="title1">title1</title>
 							<a xlink:href="#" onclick="hitBall(trn,1);" >
-									<text id="text1" class="text1" x="14%" y="60%" alignment-baseline="middle" text-anchor="middle" fill="red">Albus Dumbledore</text>
+									<text id="text1" class="text1" x="14%" y="60%" alignment-baseline="middle" text-anchor="middle" fill="black">Albus Dumbledore</text>
 							</a>
 						</svg>
 					</div>
@@ -848,7 +849,7 @@ padding-right: 55px;
 							<circle id="circle2" class="flex-item circle2" cx="40" cy="40" r="34" onclick="hitBall(trn,2);" />
 							<title id="title2">title2</title>
 							<a xlink:href="#" onclick="hitBall(trn,2);" >
-								<text id="text2" class="text2" x="14%" y="60%" alignment-baseline="middle" text-anchor="middle" fill="black">Albus Dumbledore</text>
+								<text id="text2" class="text2" x="14%" y="60%" alignment-baseline="middle" text-anchor="middle">Albus Dumbledore</text>
 							</a>
 						</svg>
 					</div>
