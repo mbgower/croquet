@@ -167,7 +167,7 @@ function nextTurn() {
 		<!-- Populate new player and log values -->
 		var timestamp = displayTime();
 		document.getElementById("playbyplay").innerHTML += [timestamp] + ": ";
-		document.getElementById("current").innerHTML="<p align='center'><div id='pos6' class='flex-item'><svg aria-labelledby='title6'><title id='title6'>Actions menu</title><circle role='button' aria-haspopup='true' id='circle6' class='flex-item circle6' cx='40' cy='40' r='34' aria-labelledby='title6' onclick='showMenu();' ></svg></div>" + "<br /><strong>" + names[trn] + " shooting</strong></p>";
+		document.getElementById("current").innerHTML="<p align='center'><div id='pos6' class='flex-item'><svg aria-labelledby='title6'><title id='title6'>Actions menu</title><circle role='button' aria-haspopup='true' id='circle6' class='flex-item circle6' cx='40' cy='40' r='20' aria-labelledby='title6' onclick='showMenu();' ></svg></div>" + "<br /><strong>" + names[trn] + " shooting</strong></p>";
 		circle6.style.fill= balls[trn];
 		circle6.style.stroke= balls[trn];
 		document.getElementById("playbyplay").innerHTML +="<img style='width:1em; height:1em; vertical-align: middle;' src='images/" + balls[trn] + "live.png' alt='" + balls[trn] +"'> " +names[trn] + " is up, shooting for <img style='width:1em; height:1em; vertical-align: middle;' src='images/" + openBalls[trn][7] + "hoop.png' alt='hoop " + openBalls[trn][7] + "'><br />";
